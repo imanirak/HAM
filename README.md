@@ -16,7 +16,7 @@ An incredible Hardware Asset Management(HAM) System. Easily manage all hardware 
 - As a user I want to be able to tie the device to an owner.
 - As a user I want to be able to get the serial number from the device.
 - As a user I want to have accurate numbers of our inventory.
-- As a user I want to be able to modify the status of ant device. (with owner, damaged, out for repair)
+- As a user I want to be able to modify the status of any device. (with owner, damaged, out for repair)
 
 
 # ERD:
