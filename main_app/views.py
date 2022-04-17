@@ -9,3 +9,8 @@ class Home(View):
     
     def get(self,request):
         return HttpResponse("Home Page")
+    
+
+class About(View):
+    def get(self,request):
+        return HttpResponse("About Page")
