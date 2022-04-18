@@ -11,7 +11,7 @@ DEPARTMENT_CHOICES = (
     ('Eng', 'Engineering'),
     ('Exec','Executive'),
     ('Fin','Finance'),
-    ('IT', 'Information Technology'),
+    ('IT', 'IT'),
     ('Legal','Legal'),
     ('MKTG','Marketing'),
     ('MX','Member Experience'),
@@ -41,13 +41,23 @@ DEVICE_CHOICES = (
 
 )
 
+SHIPSTATUS_CHOICES = (
+    ('Y','Yes'),
+     ('N','No'),
+   ('De','Delivered'),
+   ('WO','With Owner'),
+   ('WC','With Company'),
+
+
+)
+
 class Device(models.Model):
     name = models.CharField(max_length=50)
     device_type = models.CharField(max_length=50, choices=DEVICE_CHOICES)
     serial_number = models.CharField(max_length=50)
     model_number = models.CharField(max_length=50)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES)
-    is_shipped = models.BooleanField(default=False)
+    ship_status = models.CharField(max_length=50, choices=SHIPSTATUS_CHOICES)
     
     def __str__(self):
         return self.name
@@ -58,7 +68,10 @@ class Inventory(models.Model):
     device = models.ManyToManyField(Device)
 
 class Employee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=80)
+    last_name = models.CharField(max_length=80)
+    # added_by = models.OneToOneField(User, on_delete=models.CASCADE)
     department = models.CharField(max_length=50, choices = DEPARTMENT_CHOICES)
     devices = models.ForeignKey(Device, on_delete=models.CASCADE)
     is_manager = models.BooleanField(default=False)
