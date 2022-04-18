@@ -45,5 +45,9 @@ class Employee(models.Model):
     user = models.OneToOneField(User, one_delete=models.CASCADE)
     department = models.CharField(max_length=10, choices = DEPARTMENT_CHOICES)
     devices = models.ManyToManyField(Device)
-
+    
+class Inventory(models.Model):
+    total_stock = models.IntegerField()
+    
+    
 
