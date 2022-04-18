@@ -1,53 +1,54 @@
 from django.db import models
 from django.contrib.auth.models import User
+
 # Create your models here.
 
 DEPARTMENT_CHOICES = (
-    ('Clinical Operations'),
-    ('Coaching'),
-    ('Commerical'),
-    ('Data'),
-    ('Engineering'),
-    ('Executive'),
-    ('Finance'),
-    ('IT'),
-    ('Legal'),
-    ('Marketing'),
-    ('Member Experience'),
-    ('Operations'),
-    ('Product'),
-    ('Program & Content'),
-    ('Strategic Initatives'),
-    ('Strategy'),
-    ('Talent & People')
+    ('Clinical Ops','Clinical Operations'),
+    ('Coaching','Coaching'),
+    ('Com' ,'Commerical'),
+    ('data','Data'),
+    ('Eng', 'Engineering'),
+    ('Exec','Executive'),
+    ('Fin','Finance'),
+    ('IT', 'Information Technology'),
+    ('Legal','Legal'),
+    ('MKTG','Marketing'),
+    ('MX','Member Experience'),
+    ('Ops','Operations'),
+    ('Prod','Product'),
+    ('P&C','Program & Content'),
+    ('Strat Init','Strategic Initatives'),
+    ('Strat','Strategy'),
+    ('Tal&PPL','Talent & People')
 )
 
 
 STATUS_CHOICES = (
-   ('NEW'),
-   ('In-Repair'),
-   ('Shipped'),
-   ('Damaged'),
-   ('Repaired'),
-   ('Junk Out')
+   ('NEW','NEW'),
+   ('IR','In-Repair'),
+   ('S','Shipped'),
+   ('D','Damaged'),
+   ('R','Repaired'),
+   ('JO','Junk Out')
 )
 
 
+    
 class Device(models.Model):
     device_type = models.CharField(max_length=50)
     serial_number = models.CharField(max_length=50)
     model_number = models.CharField(max_length=50)
-    status = models.CharField(max_length=30, choices=STATUS_CHOICES)
-    
-    
-
-class Employee(models.Model):
-    user = models.OneToOneField(User, one_delete=models.CASCADE)
-    department = models.CharField(max_length=10, choices = DEPARTMENT_CHOICES)
-    devices = models.ManyToManyField(Device)
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES)
+    is_shipped = models.BooleanField(default=False)
     
 class Inventory(models.Model):
     total_stock = models.IntegerField()
-    
-    
+    device = models.ManyToManyField(Device)
 
+class Employee(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    department = models.CharField(max_length=50, choices = DEPARTMENT_CHOICES)
+    devices = models.ForeignKey(Device, on_delete=models.CASCADE)
+    is_manager = models.BooleanField(default=False)
+    
