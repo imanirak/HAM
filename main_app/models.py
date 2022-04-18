@@ -33,14 +33,25 @@ STATUS_CHOICES = (
    ('JO','Junk Out')
 )
 
+DEVICE_CHOICES = (
+    ('MBA','MacBook Air'),
+   ('MBP','MacBook Pro'),
+   ('S','Microsoft Surface'),
+   ('M','Monitor'),
 
-    
+)
+
 class Device(models.Model):
-    device_type = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
+    device_type = models.CharField(max_length=50, choices=DEVICE_CHOICES)
     serial_number = models.CharField(max_length=50)
     model_number = models.CharField(max_length=50)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES)
     is_shipped = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.name
+   
     
 class Inventory(models.Model):
     total_stock = models.IntegerField()
@@ -51,4 +62,7 @@ class Employee(models.Model):
     department = models.CharField(max_length=50, choices = DEPARTMENT_CHOICES)
     devices = models.ForeignKey(Device, on_delete=models.CASCADE)
     is_manager = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.name
     
