@@ -32,11 +32,18 @@ STATUS_CHOICES = (
    ('Junk Out')
 )
 
- 
+
+class Device(models.Model):
+    device_type = models.CharField(max_length=50)
+    serial_number = models.CharField(max_length=50)
+    model_number = models.CharField(max_length=50)
+    status = models.CharField(max_length=30, choices=STATUS_CHOICES)
+    
+    
 
 class Employee(models.Model):
     user = models.OneToOneField(User, one_delete=models.CASCADE)
     department = models.CharField(max_length=10, choices = DEPARTMENT_CHOICES)
     devices = models.ManyToManyField(Device)
-    
+
 
