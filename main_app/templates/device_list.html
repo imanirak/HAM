@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Devices:</h1>
+    {% for device in devices %}
+    <h3>Name: {{device.name}}</h3>
+    <h3>Serial Number: {{device.serial_number}}</h3>
+    <h3>Model Number: {{device.model_number}}</h3>
+    <ul>
+        {% for employee in employees %}
+            <li>{{employee.first_name}}: {{employee.last_name}}</li>
+        {% empty %}
+            <div>Unassigned</div>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+{% endblock %}

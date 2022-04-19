@@ -71,7 +71,6 @@ class Employee(models.Model):
     name = models.CharField(max_length=50)
     first_name = models.CharField(max_length=80)
     last_name = models.CharField(max_length=80)
-    # added_by = models.OneToOneField(User, on_delete=models.CASCADE)
     department = models.CharField(max_length=50, choices = DEPARTMENT_CHOICES)
     devices = models.ForeignKey(Device, on_delete=models.CASCADE)
     is_manager = models.BooleanField(default=False)

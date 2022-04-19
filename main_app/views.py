@@ -28,12 +28,46 @@ class Employee_Create(LoginRequiredMixin, CreateView):
         self.object.save()
         return HttpResponse('/users')
 
+class Employee_List(TemplateView):
+    template_name='employee_list.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        name = self.request.GET.get('name')
+        
+        if name != None:
+            context['employees']=Employee.objects.filter(name__icontains=name)
+            context['header']= f'Searching for {name}'
+        else:
+            context['employees']=Employee.objects.all()
+            context['header']= 'Employees:'
+            
+        return context
+    
+class Device_List(TemplateView):
+    template_name='device_list.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        name = self.request.GET.get('name')
+        
+        if name != None:
+            context['devices']=Device.objects.filter(name__icontains=name)
+            context['header']= f'Searching for {name}'
+        else:
+            context['devices']=Device.objects.all()
+            context['header']= 'Devices:'
+            
+        return context
 
 @login_required
 def profile(request, username):
     user = User.objects.get(username=username)
     devices = Device.objects.filter(user=user)
-    return render(request, 'profile.html', {'username': username, 'devices': devices})
+    employees = Employee.objects.filter(user=user)
+    return render(request, 'profile.html', {'username': username, 'devices': devices, 'employees':employees})
+
+
 
 
 def signup_view(request):

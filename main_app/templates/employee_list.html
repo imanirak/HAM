@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Our Employee:</h1>
+    {% for employee in employees %}
+    <h3>Name: {{employee.name}}</h3>
+    {% endfor %}
+{% endblock %}
