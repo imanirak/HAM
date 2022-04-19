@@ -6,7 +6,7 @@
   <div>
     <ul>
       {% for device in employee.devices.all %}
-          <h4>{{device.name}}</h4>
+          <h4>{{device}}</h4>
       {% empty %}
           <div>This user currently has no devices. </div>
       {% endfor %}
@@ -14,8 +14,8 @@
   </div>
   
   <di class="update">
-    <a href="{% url 'employee_update' employee.pk %}">Edit Parrot</a>
-    <a href="{% url 'employee_delete' employee.pk %}">Delete Parrot</a>
+    <a href="{% url 'employee_update' employee.pk %}">Edit Employee</a>
+
 </div>
   </div>
 </div>

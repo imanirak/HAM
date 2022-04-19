@@ -77,7 +77,7 @@ class Employee(models.Model):
     last_name = models.CharField(max_length=80)
     department = models.CharField(max_length=50, choices = DEPARTMENT_CHOICES)
     is_manager = models.BooleanField(default=False)
-    devices = models.ForeignKey(Device, on_delete=models.CASCADE, blank=True)
+    devices = models.ManyToManyField(Device,blank=True)
     
     
     def __str__(self):

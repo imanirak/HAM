@@ -7,6 +7,9 @@ urlpatterns = [
     #Employees
     path('employees/new', views.Employee_Create.as_view(), name="employee_create"),
     path('employees/', views.Employee_List.as_view(), name="employee_list"),
+     path('employees/<int:pk>/', views.Employee_Detail.as_view(), name="employee_detail"),
+    path('employees/<int:pk>/update', views.Employee_Update.as_view(), name="employee_update"),
+    
      #Devices
      path('devices/new', views.Device_Create.as_view(), name="device_create"),
     path('devices/', views.Device_List.as_view(), name="device_list"),
