@@ -75,7 +75,7 @@ class Device_Create(LoginRequiredMixin, CreateView):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
-        return HttpResponseRedirect('devices/')
+        return HttpResponseRedirect('/')
 
 @method_decorator(login_required, name="dispatch")   
 class Device_List(TemplateView):
@@ -105,9 +105,9 @@ def profile(request, username):
     employees = Employee.objects.filter(user=user)
     return render(request, 'profile.html', {'username': username, 'devices': devices, 'employees':employees})
 
-@method_decorator(login_required, name="dispatch")
+
 def devices_index(request):
-    devices= Device.objects.all()
+    devices = Device.objects.all()
     return render(request, 'devices_index.html', {'devices':devices})
 
 ########################################################################

@@ -11,8 +11,8 @@ urlpatterns = [
     path('employees/<int:pk>/update', views.Employee_Update.as_view(), name="employee_update"),
     
      #Devices
-     path('devices/new', views.Device_Create.as_view(), name="device_create"),
-    path('devices/', views.Device_List.as_view(), name="device_list"),
+    path('devices/new', views.Device_Create.as_view(), name="device_create"),
+    path('devices/', views.devices_index, name="devices_index"),
     #auth
     #  path('user/<username>', views.profile, name='employee'),
     path('accounts/signup/', views.signup_view, name='signup')
