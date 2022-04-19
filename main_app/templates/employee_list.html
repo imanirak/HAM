@@ -1,11 +1,38 @@
 {% extends 'base.html' %}
-{% block content %}
-    <h1>Our Employee:</h1>
-    
-    {% for employee in employees %}
-    <h3>Owner: {{employee}}</h3>
-    {% endfor %}
 
+{% block title %}
+Employee List
+{% endblock %}
+
+{% block content %}
+
+<form>
+    <div>
+      
+        <input type="text" name="name" placeholder="name"/>
+        <input type="submit" value="Search"/>
+    <a class ="clear" href="{% url 'employee_list' %}">Clear Search</a>
+    </div>
   
+</form>
+
+<h1>{{header}}</h1>
+<div class="container">
+
+
+
+    <div class="column">    
+        {% for employee in employees %}
+            <a href="{% url 'employee_detail' employee.pk %}">
+                <h3>Name: {{employee.name}}</h3>
+            </a>
     
+
+            {% endfor %}
+</div>
+
+</div>
+
+   
+  
 {% endblock %}

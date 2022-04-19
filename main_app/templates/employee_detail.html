@@ -1,0 +1,25 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<h1>{{employee.name}}</h1>
+<div class="container">
+  <div>
+    <ul>
+      {% for device in employee.devices.all %}
+          <h4>{{device}}</h4>
+      {% empty %}
+          <div>This user currently has no devices. </div>
+      {% endfor %}
+  </ul>
+  </div>
+  
+  <di class="update">
+    <a href="{% url 'employee_update' employee.pk %}">Edit Employee</a>
+
+</div>
+  </div>
+</div>
+
+
+
+{% endblock %}
