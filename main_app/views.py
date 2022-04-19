@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import View
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import User, Device, Employee
 from django.views.generic.base import TemplateView
 from django.contrib.auth import authenticate, login, logout
@@ -19,14 +19,14 @@ class About(TemplateView):
 
 class Employee_Create(LoginRequiredMixin, CreateView):
     model = Employee
-    fields = ['first name', 'last name', 'Department', 'Devices', ]
+    fields = ['first_name', 'last_name', 'department', 'devices', ]
     template_name = "employee_create.html"
     
     def form_valid(self,form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
-        return HttpResponse('/users')
+        return HttpResponseRedirect('employees/')
 
 class Employee_List(TemplateView):
     template_name='employee_list.html'
@@ -45,6 +45,19 @@ class Employee_List(TemplateView):
             
         return context
     
+
+class Device_Create(LoginRequiredMixin, CreateView):
+    model = Device
+    fields = ['name', 'device_type', 'serial_number', 'model_number', 'status','ship_status']
+    template_name = "device_create.html"
+    
+    def form_valid(self,form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect('devices/')
+
+    
 class Device_List(TemplateView):
     template_name='device_list.html'
     
@@ -60,6 +73,10 @@ class Device_List(TemplateView):
             context['header']= 'Devices:'
             
         return context
+    
+    
+    
+    
 
 @login_required
 def profile(request, username):
