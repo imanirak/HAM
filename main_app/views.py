@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import User, Device, Employee
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView,DetailView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -45,6 +45,9 @@ class Employee_List(TemplateView):
             
         return context
     
+class Employee_Detail(DetailView):
+    model = Employee
+    template_name = "employee_detail.html"
 
 class Device_Create(LoginRequiredMixin, CreateView):
     model = Device
