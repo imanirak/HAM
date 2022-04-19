@@ -46,6 +46,16 @@ class Employee_List(TemplateView):
         return context
     
 
+class Device_Create(LoginRequiredMixin, CreateView):
+    model = Device
+    fields = ['name', 'device_type', 'serial_number', 'model_number', 'status','ship_status']
+    template_name = "device_create.html"
+    
+    def form_valid(self,form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect('devices/')
 
     
 class Device_List(TemplateView):
