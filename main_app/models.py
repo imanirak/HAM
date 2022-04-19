@@ -11,7 +11,7 @@ DEPARTMENT_CHOICES = (
     ('Eng', 'Engineering'),
     ('Exec','Executive'),
     ('Fin','Finance'),
-    ('IT', 'Information Technology'),
+    ('IT', 'IT'),
     ('Legal','Legal'),
     ('MKTG','Marketing'),
     ('MX','Member Experience'),
@@ -33,22 +33,49 @@ STATUS_CHOICES = (
    ('JO','Junk Out')
 )
 
+DEVICE_CHOICES = (
+    ('MBA','MacBook Air'),
+   ('MBP','MacBook Pro'),
+   ('S','Microsoft Surface'),
+
+)
+
+SHIPSTATUS_CHOICES = (
+    ('Y','Yes'),
+     ('N','No'),
+   ('WO','With Owner'),
+   ('WC','With Company'),
+
+
+)
+
 
     
+class Employee(models.Model):
+    name = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=80)
+    last_name = models.CharField(max_length=80)
+    department = models.CharField(max_length=50, choices = DEPARTMENT_CHOICES)
+    is_manager = models.BooleanField(default=False)
+    
+    
+    def __str__(self):
+        return self.name
+    
+    
 class Device(models.Model):
-    device_type = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
+    device_type = models.CharField(max_length=50, choices=DEVICE_CHOICES)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, null = True, blank=True)
     serial_number = models.CharField(max_length=50)
     model_number = models.CharField(max_length=50)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES)
-    is_shipped = models.BooleanField(default=False)
+    ship_status = models.CharField(max_length=50, choices=SHIPSTATUS_CHOICES)
     
+    def __str__(self):
+        return self.name
+   
 class Inventory(models.Model):
     total_stock = models.IntegerField()
     device = models.ManyToManyField(Device)
-
-class Employee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    department = models.CharField(max_length=50, choices = DEPARTMENT_CHOICES)
-    devices = models.ForeignKey(Device, on_delete=models.CASCADE)
-    is_manager = models.BooleanField(default=False)
     
