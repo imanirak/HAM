@@ -1,20 +1,27 @@
-{% extends 'base.html' %}
-{% block body %}
+{% extends 'base.html' %} 
 
-<h1>Device Details</h1>
+{% block content %}
 
-<div>
-    <div>
-        <span>Device Name: {{ devices.name }}</span>
-        <p>Serial #: {{ devices.serial_number }}</p>
-        {% for employees in devices.employee_set.all %}
-            <p>Owned by: {{employee.name}}</p>
-        {% empty %}
-            <p>Device has not been assigned to an employee.</p>
-        {% endfor %}
-    </div>
-    <div>
-      
-    </div>
+<div class="container">
+  <div>
+    <h1>{{devices.name}}</h1>
+    <ul>
+          <h4>{{devices.name}}</h4>
+          <h4>{{devices.device_type}}</h4>
+          <h4>{{devices.serial_number}}</h4>
+          <h4>{{devices.model_number}}</h4>
+          <h4>{{devices.status}}</h4>
+          <h4>{{devices.ship_status}}</h4>
+  </ul>
+  </div>
+  
+  <di class="update">
+    <a href="{% url 'devices_update' devices.pk %}">Edit Device</a>
+
 </div>
+  </div>
+</div>
+
+
+
 {% endblock %}

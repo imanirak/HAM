@@ -1,16 +1,20 @@
+<!-- templates/parrotsnacks_index.html -->
 {% extends 'base.html' %}
 {% block body %}
 
-<h1>Device List</h1>
-{% for device in devices %}
+<h1>Devices:</h1>
+
+{% for device in devices %} 
     <div>
         <a href="{% url 'devices_show' device.id %}">
-            <div>
-                <span>{{ device.name }}</span>
-                <h3>{{device.serial_number}}</h3>
+            <div class="card-content">
+                {%for employee in device.employee_set.all%}
+               <h1>{{employee.name}}</h1>
+                <span>{{ device.serial_number }}</span>
             </div>
         </a>
     </div>
+    {% endfor %}
 {% endfor %}
 
 {% endblock %}

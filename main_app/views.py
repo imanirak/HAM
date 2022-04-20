@@ -116,6 +116,14 @@ class Device_Create(CreateView):
         self.object.user = self.request.user
         self.object.save()
         return HttpResponseRedirect('/')
+
+@method_decorator(login_required, name="dispatch")
+class Device_Update(UpdateView):
+    model = Device
+    fields = ['name', 'device_type', 'serial_number', 'model_number', 'status','ship_status']
+    template_name = 'devices_update.html'
+    success_url = "/devices"
+
 ########################################################################
 
 def signup_view(request):
