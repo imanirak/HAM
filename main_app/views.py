@@ -64,7 +64,12 @@ class Employee_Update(UpdateView):
     def get_success_url(self):
         return reverse('employee_detail', kwargs={'pk': self.object.pk})
   
-   
+  
+@method_decorator(login_required, name="dispatch")
+class Employee_Delete(DeleteView):
+    model = Employee
+    template_name = 'employee_delete.html'
+    success_url = "/employees/"
 
 @method_decorator(login_required, name="dispatch")   
 class Device_List(TemplateView):
@@ -126,8 +131,9 @@ class Device_Update(UpdateView):
 
 class Device_Delete(DeleteView):
     model = Device
-    template_name = 'devices_confirm_delete.html'
+    template_name = 'devices_delete.html'
     success_url = '/devices'
+    
     
 ########################################################################
 
