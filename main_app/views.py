@@ -9,6 +9,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.decorators import method_decorator
 from django.urls import reverse
 
 
@@ -19,6 +20,7 @@ class About(TemplateView):
     template_name='about.html'
 
 
+@method_decorator(login_required, name="dispatch")
 class Employee_Create(LoginRequiredMixin, CreateView):
     model = Employee
     fields = ['first_name', 'last_name', 'department', 'devices']
@@ -29,7 +31,8 @@ class Employee_Create(LoginRequiredMixin, CreateView):
         self.object.user = self.request.user
         self.object.save()
         return HttpResponseRedirect('employees/')
-
+    
+@method_decorator(login_required, name="dispatch")
 class Employee_List(TemplateView):
     template_name='employee_list.html'
     
@@ -46,32 +49,24 @@ class Employee_List(TemplateView):
             context['header']= 'Employees:'
             
         return context
-    
+
+@method_decorator(login_required, name="dispatch")    
 class Employee_Detail(DetailView):
     model = Employee
     template_name = "employee_detail.html"
-    
+ 
+
+@method_decorator(login_required, name="dispatch")  
 class Employee_Update(UpdateView):
     model = Employee
     fields = ['first_name', 'last_name', 'department', 'devices']
     template_name = "employee_update.html"
     def get_success_url(self):
         return reverse('employee_detail', kwargs={'pk': self.object.pk})
-    
-    
+  
+   
 
-class Device_Create(LoginRequiredMixin, CreateView):
-    model = Device
-    fields = ['name', 'device_type', 'serial_number', 'model_number', 'status','ship_status']
-    template_name = "device_create.html"
-    
-    def form_valid(self,form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return HttpResponseRedirect('devices/')
-
-    
+@method_decorator(login_required, name="dispatch")   
 class Device_List(TemplateView):
     template_name='device_list.html'
     
@@ -88,9 +83,9 @@ class Device_List(TemplateView):
             
         return context
     
-    
-    
-    
+
+######################################################################
+
 
 @login_required
 def profile(request, username):
@@ -100,7 +95,41 @@ def profile(request, username):
     return render(request, 'profile.html', {'username': username, 'devices': devices, 'employees':employees})
 
 
+def devices_index(request):
+    devices = Device.objects.all()
+    return render(request, 'devices_index.html', {'devices':devices})
 
+def devices_show(request, device_id):
+    devices = Device.objects.get(id=device_id)
+    #grabbing device employee
+    print(devices.employee_set.all())
+    return render(request, 'devices_show.html', {'devices': devices})
+
+@method_decorator(login_required, name="dispatch")
+class Device_Create(CreateView):
+    model = Device
+    fields = ['name', 'device_type', 'serial_number', 'model_number', 'status','ship_status']
+    template_name = "device_create.html"
+    
+    def form_valid(self,form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect('/')
+
+@method_decorator(login_required, name="dispatch")
+class Device_Update(UpdateView):
+    model = Device
+    fields = ['name', 'device_type', 'serial_number', 'model_number', 'status','ship_status']
+    template_name = 'devices_update.html'
+    success_url = "/devices"
+
+class Device_Delete(DeleteView):
+    model = Device
+    template_name = 'devices_confirm_delete.html'
+    success_url = '/devices'
+    
+########################################################################
 
 def signup_view(request):
     if request.method == 'POST':

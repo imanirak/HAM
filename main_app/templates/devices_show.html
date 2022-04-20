@@ -1,0 +1,28 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+<div class="container">
+  <div>
+    <h1>{{devices.name}}</h1>
+    <ul>
+          <h4>{{devices.name}}</h4>
+          <h4>{{devices.device_type}}</h4>
+          <h4>{{devices.serial_number}}</h4>
+          <h4>{{devices.model_number}}</h4>
+          <h4>{{devices.status}}</h4>
+          <h4>{{devices.ship_status}}</h4>
+  </ul>
+  </div>
+  
+  <di class="update">
+    <a href="{% url 'devices_update' devices.pk %}">Edit Device</a>
+    <a href="{% url 'devices_delete' devices.id %}">Delete Device</a>
+
+</div>
+  </div>
+</div>
+
+
+
+{% endblock %}

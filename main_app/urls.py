@@ -11,8 +11,13 @@ urlpatterns = [
     path('employees/<int:pk>/update', views.Employee_Update.as_view(), name="employee_update"),
     
      #Devices
-     path('devices/new', views.Device_Create.as_view(), name="device_create"),
-    path('devices/', views.Device_List.as_view(), name="device_list"),
+    path('devices/', views.devices_index, name="devices_index"),
+    path('devices/<int:device_id>', views.devices_show, name='devices_show'),
+    path('devices/new', views.Device_Create.as_view(), name="device_create"),
+    path('devices/<int:pk>/update', views.Device_Update.as_view(), name="devices_update"),
+    path('parrotsnacks/<int:pk>/delete', views.Device_Delete.as_view(), name="devices_delete"),
+    
+    
     #auth
     #  path('user/<username>', views.profile, name='employee'),
     path('accounts/signup/', views.signup_view, name='signup')
