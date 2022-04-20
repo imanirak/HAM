@@ -75,7 +75,7 @@ class Employee(models.Model):
     name = models.CharField(max_length=50)
     first_name = models.CharField(max_length=80)
     last_name = models.CharField(max_length=80)
-    department = models.CharField(max_length=50, choices = DEPARTMENT_CHOICES)
+    department = models.CharField(max_length=50, choices =DEPARTMENT_CHOICES)
     is_manager = models.BooleanField(default=False)
     devices = models.ManyToManyField(Device,blank=True)
     

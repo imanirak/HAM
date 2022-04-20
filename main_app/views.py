@@ -46,6 +46,7 @@ class Employee_List(TemplateView):
         else:
             context['employees']=Employee.objects.all()
             context['devices']=Device.objects.all()
+            
             context['header']= 'Employees:'
             
         return context
