@@ -11,8 +11,11 @@ urlpatterns = [
     path('employees/<int:pk>/update', views.Employee_Update.as_view(), name="employee_update"),
     
      #Devices
-    path('devices/new', views.Device_Create.as_view(), name="device_create"),
     path('devices/', views.devices_index, name="devices_index"),
+    path('devices/<int:device_id>', views.devices_show, name='devices_show'),
+    path('devices/new', views.Device_Create.as_view(), name="device_create"),
+    
+    
     #auth
     #  path('user/<username>', views.profile, name='employee'),
     path('accounts/signup/', views.signup_view, name='signup')

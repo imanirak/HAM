@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h1>Device Details</h1>
+
+<div>
+    <div>
+        <span>Device Name: {{ devices.name }}</span>
+        <p>Serial #: {{ devices.serial_number }}</p>
+        {% for employees in devices.employee_set.all %}
+            <p>Owned by: {{employee.name}}</p>
+        {% empty %}
+            <p>Device has not been assigned to an employee.</p>
+        {% endfor %}
+    </div>
+    <div>
+      
+    </div>
+</div>
+{% endblock %}

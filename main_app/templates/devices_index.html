@@ -4,7 +4,7 @@
 <h1>Device List</h1>
 {% for device in devices %}
     <div>
-        <a href="{% url 'device_show' device.id %}">
+        <a href="{% url 'devices_show' device.id %}">
             <div>
                 <span>{{ device.name }}</span>
                 <h3>{{device.serial_number}}</h3>

@@ -65,17 +65,6 @@ class Employee_Update(UpdateView):
         return reverse('employee_detail', kwargs={'pk': self.object.pk})
   
    
-@method_decorator(login_required, name="dispatch")
-class Device_Create(LoginRequiredMixin, CreateView):
-    model = Device
-    fields = ['name', 'device_type', 'serial_number', 'model_number', 'status','ship_status']
-    template_name = "device_create.html"
-    
-    def form_valid(self,form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return HttpResponseRedirect('/')
 
 @method_decorator(login_required, name="dispatch")   
 class Device_List(TemplateView):
@@ -110,6 +99,23 @@ def devices_index(request):
     devices = Device.objects.all()
     return render(request, 'devices_index.html', {'devices':devices})
 
+def devices_show(request, device_id):
+    devices = Device.objects.get(id=device_id)
+    #grabbing device employee
+    print(devices.employee_set.all())
+    return render(request, 'devices_show.html', {'devices': devices})
+
+@method_decorator(login_required, name="dispatch")
+class Device_Create(CreateView):
+    model = Device
+    fields = ['name', 'device_type', 'serial_number', 'model_number', 'status','ship_status']
+    template_name = "device_create.html"
+    
+    def form_valid(self,form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect('/')
 ########################################################################
 
 def signup_view(request):
