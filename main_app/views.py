@@ -124,6 +124,11 @@ class Device_Update(UpdateView):
     template_name = 'devices_update.html'
     success_url = "/devices"
 
+class Device_Delete(DeleteView):
+    model = Device
+    template_name = 'devices_confirm_delete.html'
+    success_url = '/devices'
+    
 ########################################################################
 
 def signup_view(request):
