@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models import Sum
+
 
 # Create your models here.
 
@@ -59,19 +59,32 @@ class Device(models.Model):
     model_number = models.CharField(max_length=50)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES)
     ship_status = models.CharField(max_length=50, choices=SHIPSTATUS_CHOICES)
+
     
     def __str__(self):
         return self.name
+    
     
     
    
 class Inventory(models.Model):
-    name = models.CharField(max_length=50)
-    total_stock = models.IntegerField()
-    device = models.ManyToManyField(Device)
+    name = models.CharField(max_length=50, choices=DEVICE_CHOICES)
+    in_stock = models.PositiveIntegerField(default=0)
+    device = models.ManyToManyField(Device,blank=True)
     
     def __str__(self):
         return self.name
+    
+    def has_inventory(self):
+        return self.inventory > 0
+    
+    def remove_items_from_inventory(self, count=1, save=True):
+        current_inv = self.inventory
+        current_inv -= count
+        self.inventory = current_inv
+        if save == True:
+            self.save()
+        return self.inventory
     
     
 class Employee(models.Model):

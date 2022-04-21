@@ -17,6 +17,8 @@ urlpatterns = [
     path('devices/new', views.Device_Create.as_view(), name="device_create"),
     path('devices/<int:pk>/update', views.Device_Update.as_view(), name="devices_update"),
     path('devices/<int:pk>/delete', views.Device_Delete.as_view(), name="devices_delete"),
+    #Inventory 
+    path('inventory',views.inventory_index, name="inventory_index.html"),
     
     
     #auth

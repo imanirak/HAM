@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import User, Device, Employee
+from .models import User, Device, Employee, Inventory
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView
 from django.contrib.auth import authenticate, login, logout
@@ -88,7 +88,8 @@ class Device_List(TemplateView):
             context['header']= 'Devices:'
             
         return context
-    
+
+
 
 ######################################################################
 
@@ -136,7 +137,11 @@ class Device_Delete(DeleteView):
     template_name = 'devices_delete.html'
     success_url = '/devices'
     
-    
+def inventory_index(request):
+    inventory = Inventory.objects.all()
+    print(inventory)
+    return render(request, 'inventory_index.html', {'inventory':inventory})
+   
 ########################################################################
 
 def signup_view(request):
