@@ -99,11 +99,12 @@ def profile(request, username):
 
 ########################DEVICE################################
 
-
+@login_required
 def devices_index(request):
     devices = Device.objects.all()
     return render(request, 'devices_index.html', {'devices':devices})
 
+@login_required
 def devices_show(request, device_id):
     devices = Device.objects.get(id=device_id)
     #grabbing device employee
@@ -139,11 +140,11 @@ class Device_Delete(DeleteView):
   ##################### INVENTORY ##########################  
   
   
-@method_decorator(login_required, name="dispatch")
+@login_required
 def inventory_index(request):
     inventory = Inventory.objects.all()
-    print(inventory)
-    return render(request, 'inventory_index.html', {'inventory':inventory})
+    devices = Device.objects.all()
+    return render(request, 'inventory_index.html', {'inventory':inventory}, {'devices':devices})
 
 
 @method_decorator(login_required, name="dispatch")
@@ -155,9 +156,8 @@ def inventory_show(request, inventory_id):
 @method_decorator(login_required, name="dispatch")
 class Inventory_Create(CreateView):
     model = Inventory
-    fields = ['name', 'in_stock', 'device']
+    fields = ['name', 'in_stock', 'devices']
     template_name = "inventory_create.html"
-    
     
     def form_valid(self,form):
         self.object = form.save(commit=False)
@@ -165,11 +165,21 @@ class Inventory_Create(CreateView):
         self.object.save()
         return HttpResponseRedirect('/inventory')
 
-
+@method_decorator(login_required, name="dispatch")
+class Inventory_Detail(UpdateView):
+    model = Inventory
+    fields = ['name', 'in_stock', 'devices']
+    template_name = 'inventory_details.html'
+    success_url = "/inventory"
+    
+    def inventory_select(request, inventory_id):
+        inventory = Inventory.objects.get(id=inventory_id)
+        return render(request, 'inventory_detail.html', {'inventory': inventory})
+    
 @method_decorator(login_required, name="dispatch")
 class Inventory_Update(UpdateView):
     model = Inventory
-    fields = ['name', 'in_stock', 'device']
+    fields = ['name', 'in_stock', 'devices']
     template_name = 'inventory_update.html'
     success_url = "/inventory"
     

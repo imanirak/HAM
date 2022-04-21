@@ -17,8 +17,8 @@
     <div class="column">    
         <h1>Inventory</h1>
         {% for inventory in inventory %}
-          
-                <h3>Item:{{inventory}}</h3>
+        <a href="{% url 'inventory_detail' inventory.pk %}">
+                <h3>Item:{{inventory.name}}</h3>
                 <h3>In Stock:{{inventory.in_stock}}</h3>
                
                 

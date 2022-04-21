@@ -65,12 +65,11 @@ class Device(models.Model):
         return self.name
     
     
-    
    
 class Inventory(models.Model):
     name = models.CharField(max_length=50, choices=DEVICE_CHOICES)
     in_stock = models.PositiveIntegerField(default=0)
-    device = models.ManyToManyField(Device,blank=True)
+    devices = models.ManyToManyField(Device,blank=True)
     
     def __str__(self):
         return self.name

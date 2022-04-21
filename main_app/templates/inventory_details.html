@@ -1,0 +1,27 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+<div class="container">
+    <div>
+      <h1>{{inventory.name}}</h1>
+      <ul>
+        {% for devices in inventory.devices.all %}
+            <h4>{{inventory.in_stock}}</h4>
+        {% empty %}
+            <div>Currently out of stock </div>
+        {% endfor %}
+    </ul>
+    </div>
+  
+  <div class="update">
+    <a href="{% url 'inventory_update' inventory.pk %}">Edit {{inventory.name}}</a>
+    <a href="{% url 'inventory_delete' inventory.pk %}">Delete {{inventory.name}}</a>
+
+</div>
+  </div>
+</div>
+
+
+
+{% endblock %}

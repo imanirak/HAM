@@ -17,9 +17,10 @@ urlpatterns = [
     path('devices/<int:pk>/update', views.Device_Update.as_view(), name="devices_update"),
     path('devices/<int:pk>/delete', views.Device_Delete.as_view(), name="devices_delete"),
     #Inventory 
-    path('inventory',views.inventory_index, name="inventory_index.html"),
+    path('inventory',views.inventory_index, name="inventory_index"),
     path('inventory/<int:inventory_id>', views.inventory_show, name='inventory_show'),
     path('inventory/new', views.Inventory_Create.as_view(), name="inventory_create"),
+    path('inventory/<int:pk>/', views.Inventory_Detail.as_view(), name="inventory_detail"),
     path('inventory/<int:pk>/update', views.Inventory_Update.as_view(), name="inventory_update"),
     path('inventory/<int:pk>/delete', views.Inventory_Delete.as_view(), name="inventory_delete"),
     
