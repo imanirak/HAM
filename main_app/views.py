@@ -90,16 +90,14 @@ class Device_List(TemplateView):
         return context
 
 
-
-######################################################################
-
-
 @login_required
 def profile(request, username):
     user = User.objects.get(username=username)
     devices = Device.objects.filter(user=user)
     employees = Employee.objects.filter(user=user)
     return render(request, 'profile.html', {'username': username, 'devices': devices, 'employees':employees})
+
+########################DEVICE################################
 
 
 def devices_index(request):
@@ -136,13 +134,52 @@ class Device_Delete(DeleteView):
     model = Device
     template_name = 'devices_delete.html'
     success_url = '/devices'
-    
+  
+  
+  ##################### INVENTORY ##########################  
+  
+  
+@method_decorator(login_required, name="dispatch")
 def inventory_index(request):
     inventory = Inventory.objects.all()
     print(inventory)
     return render(request, 'inventory_index.html', {'inventory':inventory})
+
+
+@method_decorator(login_required, name="dispatch")
+def inventory_show(request, inventory_id):
+    inventory = Inventory.objects.get(id=inventory_id)
+    return render(request, 'inventory_show.html', {'inventory': inventory})
+
+
+@method_decorator(login_required, name="dispatch")
+class Inventory_Create(CreateView):
+    model = Inventory
+    fields = ['name', 'in_stock', 'device']
+    template_name = "inventory_create.html"
+    
+    
+    def form_valid(self,form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect('/inventory')
+
+
+@method_decorator(login_required, name="dispatch")
+class Inventory_Update(UpdateView):
+    model = Inventory
+    fields = ['name', 'in_stock', 'device']
+    template_name = 'inventory_update.html'
+    success_url = "/inventory"
+    
+@method_decorator(login_required, name="dispatch")
+class Inventory_Delete(DeleteView):
+    model = Device
+    template_name = 'inventory_delete.html'
+    success_url = '/inventory'
    
-########################################################################
+###########################SIGNUP##################################
 
 def signup_view(request):
     if request.method == 'POST':
