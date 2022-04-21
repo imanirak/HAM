@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form>
+    <div>
+      
+        <input type="text" name="name" placeholder="name"/>
+        <input type="submit" value="Search"/>
+ 
+    </div>
+  
+</form>
+
+<div class="container">
+
+
+    <div class="column">    
+        <h1>Inventory</h1>
+        {% for inventory in inventory %}
+        <a href="{% url 'inventory_detail' inventory.pk %}">
+                <h3>Item:{{inventory.name}}</h3>
+                <h3>In Stock:{{inventory.in_stock}}</h3>
+               
+                
+        
+            </a>
+    
+
+            {% endfor %}
+</div>
+
+</div>
+
+   
+  
+{% endblock %}

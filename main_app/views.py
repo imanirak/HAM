@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import User, Device, Employee
+from .models import User, Device, Employee, Inventory
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView
 from django.contrib.auth import authenticate, login, logout
@@ -88,9 +88,6 @@ class Device_List(TemplateView):
             context['header']= 'Devices:'
             
         return context
-    
-
-######################################################################
 
 
 @login_required
@@ -100,11 +97,14 @@ def profile(request, username):
     employees = Employee.objects.filter(user=user)
     return render(request, 'profile.html', {'username': username, 'devices': devices, 'employees':employees})
 
+########################DEVICE################################
 
+@login_required
 def devices_index(request):
     devices = Device.objects.all()
     return render(request, 'devices_index.html', {'devices':devices})
 
+@login_required
 def devices_show(request, device_id):
     devices = Device.objects.get(id=device_id)
     #grabbing device employee
@@ -129,14 +129,67 @@ class Device_Update(UpdateView):
     fields = ['name', 'device_type', 'serial_number', 'model_number', 'status','ship_status']
     template_name = 'devices_update.html'
     success_url = "/devices"
-
+    
+@method_decorator(login_required, name="dispatch")
 class Device_Delete(DeleteView):
     model = Device
     template_name = 'devices_delete.html'
     success_url = '/devices'
+  
+  
+  ##################### INVENTORY ##########################  
+  
+  
+@login_required
+def inventory_index(request):
+    inventory = Inventory.objects.all()
+    devices = Device.objects.all()
+    return render(request, 'inventory_index.html', {'inventory':inventory}, {'devices':devices})
+
+
+@method_decorator(login_required, name="dispatch")
+def inventory_show(request, inventory_id):
+    inventory = Inventory.objects.get(id=inventory_id)
+    return render(request, 'inventory_show.html', {'inventory': inventory})
+
+
+@method_decorator(login_required, name="dispatch")
+class Inventory_Create(CreateView):
+    model = Inventory
+    fields = ['name', 'in_stock', 'devices']
+    template_name = "inventory_create.html"
     
+    def form_valid(self,form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect('/inventory')
+
+@method_decorator(login_required, name="dispatch")
+class Inventory_Detail(UpdateView):
+    model = Inventory
+    fields = ['name', 'in_stock', 'devices']
+    template_name = 'inventory_details.html'
+    success_url = "/inventory"
     
-########################################################################
+    def inventory_select(request, inventory_id):
+        inventory = Inventory.objects.get(id=inventory_id)
+        return render(request, 'inventory_detail.html', {'inventory': inventory})
+    
+@method_decorator(login_required, name="dispatch")
+class Inventory_Update(UpdateView):
+    model = Inventory
+    fields = ['name', 'in_stock', 'devices']
+    template_name = 'inventory_update.html'
+    success_url = "/inventory"
+    
+@method_decorator(login_required, name="dispatch")
+class Inventory_Delete(DeleteView):
+    model = Device
+    template_name = 'inventory_delete.html'
+    success_url = '/inventory'
+   
+###########################SIGNUP##################################
 
 def signup_view(request):
     if request.method == 'POST':

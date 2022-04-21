@@ -1,0 +1,14 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<h1>Are you sure you want to delete {{inventory.name}}?</h1>
+<form method="post">
+  {% csrf_token %}
+  <div>
+   <!-- confirm employee delete -->
+    <input type="submit" value="Confirm" />
+    <!-- Redirect back to detail on cancel -->
+    <a href="{% url 'inventory_detail' inventory.pk %}">Cancel</a>
+  </div>
+</form>
+{% endblock %}
