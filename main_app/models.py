@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Sum
 
 # Create your models here.
 
@@ -49,9 +50,7 @@ SHIPSTATUS_CHOICES = (
 
 )
 
-    
-
-    
+      
     
 class Device(models.Model):
     name = models.CharField(max_length=50)
@@ -67,8 +66,12 @@ class Device(models.Model):
     
    
 class Inventory(models.Model):
+    name = models.CharField(max_length=50)
     total_stock = models.IntegerField()
     device = models.ManyToManyField(Device)
+    
+    def __str__(self):
+        return self.name
     
     
 class Employee(models.Model):

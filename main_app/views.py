@@ -129,7 +129,8 @@ class Device_Update(UpdateView):
     fields = ['name', 'device_type', 'serial_number', 'model_number', 'status','ship_status']
     template_name = 'devices_update.html'
     success_url = "/devices"
-
+    
+@method_decorator(login_required, name="dispatch")
 class Device_Delete(DeleteView):
     model = Device
     template_name = 'devices_delete.html'
