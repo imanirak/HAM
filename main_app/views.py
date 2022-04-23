@@ -221,12 +221,39 @@ class Inventory_Update(UpdateView):
         return reverse('inventory_detail', kwargs={'pk': self.object.pk})
     
     
-@method_decorator(login_required, name="dispatch")
-class Inventory_Update(UpdateView):
+# @method_decorator(login_required, name="dispatch")
+# class Inventory_Update(UpdateView):
+#     model = Inventory
+#     fields = ['name']
+#     template_name = 'inventory_update.html'
+#     success_url = "/inventory"
+    
+@method_decorator(login_required, name="dispatch")    
+class Inventory_Add(UpdateView):
     model = Inventory
-    fields = ['name', 'in_stock']
-    template_name = 'inventory_update.html'
+    fields = ["add"]
+    template_name = 'inventory_add.html'
     success_url = "/inventory"
+    inventory = Inventory.objects.all()
+    
+    def form_valid(self,form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        add = self.object.add
+        print(self.object.name)
+        if self.object.name == 'MBA':
+            inventory_mba = Inventory.objects.filter(name='MBA')     
+            inventory_mba.update(in_stock=F('in_stock') + add)
+        elif self.object.name == 'MBP':
+            inventory_mbp = Inventory.objects.filter(name='MBP')     
+            inventory_mbp.update(in_stock=F('in_stock') + add)
+        elif self.object.name == 'S':
+            inventory_s = Inventory.objects.filter(name='S')     
+            inventory_s.update(in_stock=F('in_stock') + add)
+            
+        
+        return HttpResponseRedirect('/inventory')
     
 @method_decorator(login_required, name="dispatch")
 class Inventory_Delete(DeleteView):
