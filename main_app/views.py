@@ -109,14 +109,14 @@ class Device_List(TemplateView):
 @login_required
 def devices_index(request):
     devices = Device.objects.all()
-    print(devices.employee_set.all())
+    print(devices.all())
     return render(request, 'devices_index.html', {'devices':devices})
 
 @login_required
 def devices_show(request, device_id):
     devices = Device.objects.get(id=device_id)
     #grabbing device employee
-    print(devices.employee_set.all())
+    print(devices.all())
     return render(request, 'devices_show.html', {'devices': devices})
 
 @method_decorator(login_required, name="dispatch")

@@ -4,13 +4,12 @@
 
 <h1>Devices:</h1>
 
+
 {% for device in devices %} 
-{{device}}
-    <div> {{device.employees}}
-        {{employee.name}}
+    <div>
         <a href="{% url 'devices_show' device.id %}">
             <div class="card-content">
-                {%for employee in devices.employee.all%}
+                {%for employee in device.employee_set.all%}
                <h1>{{employee.name}}</h1>
                 <span>{{ device.serial_number }}</span>
             </div>
@@ -18,5 +17,6 @@
     </div>
     {% endfor %}
 {% endfor %}
+
 
 {% endblock %}
