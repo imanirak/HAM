@@ -24,15 +24,20 @@ Employee List
     <div class="column">    
         {% for employee in employees %}
             <a href="{% url 'employee_detail' employee.pk %}">
-                <h3>Name: {{employee.name}}</h3>
+                <h3>Name: {{employee.first_name}} {{employee.last_name}}</h3>
                 {% for device in employee.devices.all%}
+               
+              {% if employee.devices.all is None %}
+                <h3>Device: Awaiting Device</h3>
+                {% else %}
                 <h3>Device: {{device.serial_number}}</h3>
-             {%endfor%}
-        
+                {% endif %}  
+           
+            {% endfor %}
             </a>
     
 
-            {% endfor %}
+        {% endfor %}
 </div>
 
 </div>

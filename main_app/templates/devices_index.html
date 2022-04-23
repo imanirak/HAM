@@ -4,6 +4,7 @@
 
 <h1>Devices:</h1>
 
+
 {% for device in devices %} 
     <div>
         <a href="{% url 'devices_show' device.id %}">
@@ -16,5 +17,6 @@
     </div>
     {% endfor %}
 {% endfor %}
+
 
 {% endblock %}
