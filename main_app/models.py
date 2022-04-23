@@ -67,9 +67,10 @@ class Device(models.Model):
     
    
 class Inventory(models.Model):
-    total_stock = models.IntegerField()
-    device = models.ManyToManyField(Device)
-    add = models.PositiveIntegerField(default=0)
+    name = models.CharField(max_length=50, choices=DEVICE_CHOICES)
+    in_stock = models.PositiveIntegerField(default=0)
+    devices = models.ManyToManyField(Device,blank=True)
+    
     
     
 class Employee(models.Model):
