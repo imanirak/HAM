@@ -64,7 +64,7 @@ class Device(models.Model):
     def __str__(self):
         return self.name
     
-    
+
    
 class Inventory(models.Model):
     name = models.CharField(max_length=50, choices=DEVICE_CHOICES)

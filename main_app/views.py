@@ -117,10 +117,21 @@ class Device_Create(CreateView):
     fields = ['name', 'device_type', 'serial_number', 'model_number', 'status','ship_status']
     template_name = "device_create.html"
     
+    # def inventory_update(request, employee, device):
+    #     employee = Employee.objects.get(employee=employee)
+    #     device = Device.objects.get(device=device)
+    #     deduct_inventory = Inventory.objects.update_or_create(user=employee.pk, defaults={'value': 0})
+    
     def form_valid(self,form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-        self.object.save()
+        
+        device = self.object.save()
+        # for device in employee:
+        #     Device.objects.create(
+        #         user=device,
+        #         device=device)
+            
         return HttpResponseRedirect('/')
 
 @method_decorator(login_required, name="dispatch")
@@ -143,8 +154,7 @@ class Device_Delete(DeleteView):
 @login_required
 def inventory_index(request):
     inventory = Inventory.objects.all()
-    devices = Device.objects.all()
-    return render(request, 'inventory_index.html', {'inventory':inventory}, {'devices':devices})
+    return render(request, 'inventory_index.html', {'inventory':inventory}, )
 
 
 @method_decorator(login_required, name="dispatch")
@@ -156,36 +166,41 @@ def inventory_show(request, inventory_id):
 @method_decorator(login_required, name="dispatch")
 class Inventory_Create(CreateView):
     model = Inventory
-    fields = ['name', 'in_stock', 'devices']
+    fields = ['name', 'in_stock']
     template_name = "inventory_create.html"
     
     def form_valid(self,form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
+        
         return HttpResponseRedirect('/inventory')
 
-@method_decorator(login_required, name="dispatch")
-class Inventory_Detail(UpdateView):
+class Inventory_Detail(DetailView):
     model = Inventory
-    fields = ['name', 'in_stock', 'devices']
-    template_name = 'inventory_details.html'
-    success_url = "/inventory"
-    
-    def inventory_select(request, inventory_id):
-        inventory = Inventory.objects.get(id=inventory_id)
-        return render(request, 'inventory_detail.html', {'inventory': inventory})
+    template_name = "inventory_detail.html"
+
     
 @method_decorator(login_required, name="dispatch")
 class Inventory_Update(UpdateView):
     model = Inventory
     fields = ['name', 'in_stock', 'devices']
     template_name = 'inventory_update.html'
+    # success_url = "/inventory"
+    def get_success_url(self):
+        return reverse('inventory_detail', kwargs={'pk': self.object.pk})
+    
+    
+@method_decorator(login_required, name="dispatch")
+class Inventory_Update(UpdateView):
+    model = Inventory
+    fields = ['name', 'in_stock']
+    template_name = 'inventory_update.html'
     success_url = "/inventory"
     
 @method_decorator(login_required, name="dispatch")
 class Inventory_Delete(DeleteView):
-    model = Device
+    model = Inventory
     template_name = 'inventory_delete.html'
     success_url = '/inventory'
    
