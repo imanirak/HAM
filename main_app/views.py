@@ -123,28 +123,26 @@ class Device_Create(CreateView):
     fields = ['name', 'device_type', 'serial_number', 'model_number', 'status','ship_status']
     template_name = "device_create.html"
     devices = Device.objects.all()
-    inventory_mba = Inventory.objects.filter(name='MBA')
-    inventory_mbp = Inventory.objects.filter(name='MBP')
-    inventory_s = Inventory.objects.filter(name='S')
-    
-    print(devices.device_type)
+       
+  
+    def form_valid(self,form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        print(self.object)
+        if self.object.device_type == 'MBA':
+            inventory_mba = Inventory.objects.filter(name='MBA')     
+            inventory_mba.update(in_stock=F('in_stock') - 1)
+        elif self.object.device_type == 'MBP':
+            inventory_mbp = Inventory.objects.filter(name='MBP')     
+            inventory_mbp.update(in_stock=F('in_stock') - 1)
+        elif self.object.device_type == 'S':
+            inventory_s = Inventory.objects.filter(name='S')     
+            inventory_s.update(in_stock=F('in_stock') - 1)
+            
         
-    inventory_mba.update(in_stock=F('in_stock') - 1)    
-    
-    inventory_mba.update(in_stock=F('in_stock') - 1)
-    inventory_mbp.update(in_stock=F('in_stock') - 1) 
-    inventory_s.update(in_stock=F('in_stock') - 1)           
-    print(inventory_mba)
-    print(inventory_mbp)
-    # def form_valid(self,form):
-    #     self.object = form.save(commit=False)
-    #     self.object.user = self.request.user
-    #     self.object.save()
         
-        
-        # employee = Employee.objects.get(employee=employee)
-        
-HttpResponseRedirect('/')
+            return HttpResponseRedirect('/')
 
 
 @method_decorator(login_required, name="dispatch")    
