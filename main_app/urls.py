@@ -23,6 +23,7 @@ urlpatterns = [
     path('inventory/new', views.Inventory_Create.as_view(), name="inventory_create"),
     path('inventory/<int:pk>/', views.Inventory_Detail.as_view(), name="inventory_detail"),
     path('inventory/<int:pk>/update', views.Inventory_Update.as_view(), name="inventory_update"),
+    path('inventory/<int:pk>/add', views.Inventory_Add.as_view(), name="inventory_add"),
     path('inventory/<int:pk>/delete', views.Inventory_Delete.as_view(), name="inventory_delete"),
     
     

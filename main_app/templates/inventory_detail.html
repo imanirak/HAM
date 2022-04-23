@@ -16,7 +16,7 @@
     </div>
   
   <div class="update">
-    <a href="{% url 'inventory_update' inventory.pk %}">Edit {{inventory.name}}</a>
+    <a href="{% url 'inventory_add' inventory.pk %}">ADD {{inventory.name}}</a>
     <a href="{% url 'inventory_delete' inventory.pk %}">Delete {{inventory.name}}</a>
 
 </div>
