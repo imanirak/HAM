@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.urls import reverse
-
 
 # Create your models here.
 
@@ -51,7 +49,9 @@ SHIPSTATUS_CHOICES = (
 
 )
 
-      
+    
+
+    
     
 class Device(models.Model):
     name = models.CharField(max_length=50)
@@ -60,34 +60,16 @@ class Device(models.Model):
     model_number = models.CharField(max_length=50)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES)
     ship_status = models.CharField(max_length=50, choices=SHIPSTATUS_CHOICES)
-
     
     def __str__(self):
         return self.name
     
-    def get_absolute_url(self): # new
-        return reverse("devices_detail", args=[str(self.id)])
     
-
    
 class Inventory(models.Model):
-    name = models.CharField(max_length=50, choices=DEVICE_CHOICES)
-    in_stock = models.PositiveIntegerField(default=0)
-    devices = models.ManyToManyField(Device,blank=True)
-    
-    def __str__(self):
-        return self.name
-    
-    def has_inventory(self):
-        return self.inventory > 0
-    
-    def remove_items_from_inventory(self, count=1, save=True):
-        current_inv = self.inventory
-        current_inv -= count
-        self.inventory = current_inv
-        if save == True:
-            self.save()
-        return self.inventory
+    total_stock = models.IntegerField()
+    device = models.ManyToManyField(Device)
+    add = models.PositiveIntegerField(default=0)
     
     
 class Employee(models.Model):
@@ -96,7 +78,7 @@ class Employee(models.Model):
     last_name = models.CharField(max_length=80)
     department = models.CharField(max_length=50, choices =DEPARTMENT_CHOICES)
     is_manager = models.BooleanField(default=False)
-    devices = models.ManyToManyField(Device,blank=True,default='Unassigned')
+    devices = models.ManyToManyField(Device,blank=True)
     
     
     def __str__(self):

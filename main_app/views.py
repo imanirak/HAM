@@ -141,7 +141,6 @@ class Device_Create(CreateView):
             inventory_s.update(in_stock=F('in_stock') - 1)
             
         
-        
             return HttpResponseRedirect('/')
 
 
@@ -180,6 +179,7 @@ class Device_Delete(DeleteView):
 @login_required
 def inventory_index(request):
     inventory = Inventory.objects.all()
+    print(inventory)
     return render(request, 'inventory_index.html', {'inventory':inventory}, )
 
 
@@ -213,6 +213,8 @@ class Inventory_Update(UpdateView):
     fields = ['name', 'in_stock', 'devices']
     template_name = 'inventory_update.html'
     # success_url = "/inventory"
+    # def form_valid(self,form):
+    #     print(self.object.in_stock)
     def get_success_url(self):
         return reverse('inventory_detail', kwargs={'pk': self.object.pk})
     
