@@ -5,10 +5,10 @@
 <form method="post">
   {% csrf_token %}
   <div>
-   <!-- confirm employee delete -->
+
     <input type="submit" value="Confirm" />
-    <!-- Redirect back to detail on cancel -->
-    <a href="{% url 'inventory_detail' inventory.pk %}">Cancel</a>
+
+    <a href="{% url 'inventory_detail' inventory.pk %}"><button>cancel</button></a>
   </div>
 </form>
 {% endblock %}

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 # Create your models here.
@@ -64,7 +65,10 @@ class Device(models.Model):
     def __str__(self):
         return self.name
     
+    def get_absolute_url(self): # new
+        return reverse("devices_detail", args=[str(self.id)])
     
+
    
 class Inventory(models.Model):
     name = models.CharField(max_length=50, choices=DEVICE_CHOICES)
@@ -92,7 +96,7 @@ class Employee(models.Model):
     last_name = models.CharField(max_length=80)
     department = models.CharField(max_length=50, choices =DEPARTMENT_CHOICES)
     is_manager = models.BooleanField(default=False)
-    devices = models.ManyToManyField(Device,blank=True)
+    devices = models.ManyToManyField(Device,blank=True,default='Unassigned')
     
     
     def __str__(self):

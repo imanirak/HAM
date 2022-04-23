@@ -10,7 +10,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
-from django.urls import reverse
+from django.urls import reverse, NoReverseMatch
+from django.db.models import F
 
 
 class Home(TemplateView):
@@ -32,6 +33,7 @@ class Employee_Create(LoginRequiredMixin, CreateView):
         self.object.save()
         return HttpResponseRedirect('employees/')
     
+
 @method_decorator(login_required, name="dispatch")
 class Employee_List(TemplateView):
     template_name='employee_list.html'
@@ -50,7 +52,8 @@ class Employee_List(TemplateView):
             context['header']= 'Employees:'
             
         return context
-
+    
+ 
 @method_decorator(login_required, name="dispatch")    
 class Employee_Detail(DetailView):
     model = Employee
@@ -72,6 +75,19 @@ class Employee_Delete(DeleteView):
     template_name = 'employee_delete.html'
     success_url = "/employees/"
 
+
+
+
+@login_required
+def profile(request, username):
+    user = User.objects.get(username=username)
+    devices = Device.objects.filter(user=user)
+    employees = Employee.objects.filter(user=user)
+    return render(request, 'profile.html', {'username': username, 'devices': devices, 'employees':employees})
+
+########################DEVICE################################
+
+
 @method_decorator(login_required, name="dispatch")   
 class Device_List(TemplateView):
     template_name='device_list.html'
@@ -88,17 +104,7 @@ class Device_List(TemplateView):
             context['header']= 'Devices:'
             
         return context
-
-
-@login_required
-def profile(request, username):
-    user = User.objects.get(username=username)
-    devices = Device.objects.filter(user=user)
-    employees = Employee.objects.filter(user=user)
-    return render(request, 'profile.html', {'username': username, 'devices': devices, 'employees':employees})
-
-########################DEVICE################################
-
+    
 @login_required
 def devices_index(request):
     devices = Device.objects.all()
@@ -116,12 +122,45 @@ class Device_Create(CreateView):
     model = Device
     fields = ['name', 'device_type', 'serial_number', 'model_number', 'status','ship_status']
     template_name = "device_create.html"
+    devices = Device.objects.all()
+    inventory_mba = Inventory.objects.filter(name='MBA')
+    inventory_mbp = Inventory.objects.filter(name='MBP')
+    inventory_s = Inventory.objects.filter(name='S')
     
-    def form_valid(self,form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return HttpResponseRedirect('/')
+    print(devices.device_type)
+        
+    inventory_mba.update(in_stock=F('in_stock') - 1)    
+    
+    inventory_mba.update(in_stock=F('in_stock') - 1)
+    inventory_mbp.update(in_stock=F('in_stock') - 1) 
+    inventory_s.update(in_stock=F('in_stock') - 1)           
+    print(inventory_mba)
+    print(inventory_mbp)
+    # def form_valid(self,form):
+    #     self.object = form.save(commit=False)
+    #     self.object.user = self.request.user
+    #     self.object.save()
+        
+        
+        # employee = Employee.objects.get(employee=employee)
+        
+HttpResponseRedirect('/')
+
+
+@method_decorator(login_required, name="dispatch")    
+class Devices_Detail(DetailView):
+    model = Device
+    template_name = "devices_detail.html"
+ 
+
+@method_decorator(login_required, name="dispatch")  
+class Device_Update(UpdateView):
+    model = Employee
+    fields = ['name', 'device_type', 'serial_number', 'model_number', 'status','ship_status']
+    template_name = "devices_update.html"
+    def get_success_url(self):
+        return reverse('devices_detail', kwargs={'pk': self.object.pk})
+    
 
 @method_decorator(login_required, name="dispatch")
 class Device_Update(UpdateView):
@@ -143,8 +182,7 @@ class Device_Delete(DeleteView):
 @login_required
 def inventory_index(request):
     inventory = Inventory.objects.all()
-    devices = Device.objects.all()
-    return render(request, 'inventory_index.html', {'inventory':inventory}, {'devices':devices})
+    return render(request, 'inventory_index.html', {'inventory':inventory}, )
 
 
 @method_decorator(login_required, name="dispatch")
@@ -156,36 +194,41 @@ def inventory_show(request, inventory_id):
 @method_decorator(login_required, name="dispatch")
 class Inventory_Create(CreateView):
     model = Inventory
-    fields = ['name', 'in_stock', 'devices']
+    fields = ['name', 'in_stock']
     template_name = "inventory_create.html"
     
     def form_valid(self,form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
+        
         return HttpResponseRedirect('/inventory')
 
-@method_decorator(login_required, name="dispatch")
-class Inventory_Detail(UpdateView):
+class Inventory_Detail(DetailView):
     model = Inventory
-    fields = ['name', 'in_stock', 'devices']
-    template_name = 'inventory_details.html'
-    success_url = "/inventory"
-    
-    def inventory_select(request, inventory_id):
-        inventory = Inventory.objects.get(id=inventory_id)
-        return render(request, 'inventory_detail.html', {'inventory': inventory})
+    template_name = "inventory_detail.html"
+
     
 @method_decorator(login_required, name="dispatch")
 class Inventory_Update(UpdateView):
     model = Inventory
     fields = ['name', 'in_stock', 'devices']
     template_name = 'inventory_update.html'
+    # success_url = "/inventory"
+    def get_success_url(self):
+        return reverse('inventory_detail', kwargs={'pk': self.object.pk})
+    
+    
+@method_decorator(login_required, name="dispatch")
+class Inventory_Update(UpdateView):
+    model = Inventory
+    fields = ['name', 'in_stock']
+    template_name = 'inventory_update.html'
     success_url = "/inventory"
     
 @method_decorator(login_required, name="dispatch")
 class Inventory_Delete(DeleteView):
-    model = Device
+    model = Inventory
     template_name = 'inventory_delete.html'
     success_url = '/inventory'
    

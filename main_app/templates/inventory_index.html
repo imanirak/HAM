@@ -13,7 +13,7 @@
 
 <div class="container">
 
-
+    <a href="{% url 'inventory_create'  %}">Create </a>
     <div class="column">    
         <h1>Inventory</h1>
         {% for inventory in inventory %}
@@ -21,7 +21,6 @@
                 <h3>Item:{{inventory.name}}</h3>
                 <h3>In Stock:{{inventory.in_stock}}</h3>
                
-                
         
             </a>
     
