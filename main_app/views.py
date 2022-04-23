@@ -24,14 +24,15 @@ class About(TemplateView):
 @method_decorator(login_required, name="dispatch")
 class Employee_Create(LoginRequiredMixin, CreateView):
     model = Employee
-    fields = ['first_name', 'last_name', 'department', 'devices']
+    fields = ['name','first_name', 'last_name', 'department', 'devices']
     template_name = "employee_create.html"
     
     def form_valid(self,form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
-        return HttpResponseRedirect('employees/')
+        print(self.object.first_name)
+        return HttpResponseRedirect('/')
     
 
 @method_decorator(login_required, name="dispatch")
@@ -63,7 +64,7 @@ class Employee_Detail(DetailView):
 @method_decorator(login_required, name="dispatch")  
 class Employee_Update(UpdateView):
     model = Employee
-    fields = ['first_name', 'last_name', 'department', 'devices']
+    fields = ['name','first_name', 'last_name', 'department', 'devices']
     template_name = "employee_update.html"
     def get_success_url(self):
         return reverse('employee_detail', kwargs={'pk': self.object.pk})
@@ -108,6 +109,7 @@ class Device_List(TemplateView):
 @login_required
 def devices_index(request):
     devices = Device.objects.all()
+    print(devices.employee_set.all())
     return render(request, 'devices_index.html', {'devices':devices})
 
 @login_required
@@ -141,7 +143,7 @@ class Device_Create(CreateView):
             inventory_s.update(in_stock=F('in_stock') - 1)
             
         
-            return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/')
 
 
 @method_decorator(login_required, name="dispatch")    

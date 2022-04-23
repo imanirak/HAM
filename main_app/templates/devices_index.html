@@ -5,10 +5,12 @@
 <h1>Devices:</h1>
 
 {% for device in devices %} 
-    <div>
+{{device}}
+    <div> {{device.employees}}
+        {{employee.name}}
         <a href="{% url 'devices_show' device.id %}">
             <div class="card-content">
-                {%for employee in device.employee_set.all%}
+                {%for employee in devices.employee.all%}
                <h1>{{employee.name}}</h1>
                 <span>{{ device.serial_number }}</span>
             </div>

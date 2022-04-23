@@ -18,8 +18,17 @@
         <h1>Inventory</h1>
         {% for inventory in inventory %}
         <a href="{% url 'inventory_detail' inventory.pk %}">
-                <h3>Item:{{inventory.name}}</h3>
-                <h3>In Stock:{{inventory.in_stock}}</h3>
+
+                <h2>Item:{{inventory.name}}</h2>
+                {% if inventory.in_stock < 1 %}
+                <h3>Currently out of stock</h3>
+                {% elif inventory.in_stock <= 5 %}
+                <h3>replenish stock</h3>
+                <h3>{{inventory.in_stock}}</h3>
+                {% else %}
+                    <div>{{inventory.in_stock}}</div>
+                {% endif %}
+            
                
         
             </a>

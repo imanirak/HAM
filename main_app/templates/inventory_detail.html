@@ -6,11 +6,12 @@
     <div>
       <h1>{{inventory.name}}</h1>
       <ul>
-        {% for devices in inventory.devices.all %}
-            <h4>{{inventory.in_stock}}</h4>
-        {% empty %}
-            <div>Currently out of stock </div>
-        {% endfor %}
+    
+        {% if inventory.in_stock < 1 %}
+        <h3>Currently out of stock</h3>
+        {% else %}
+            <div>{{inventory.in_stock}}</div>
+        {% endif %}
     </ul>
     </div>
   
