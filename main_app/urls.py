@@ -14,6 +14,7 @@ urlpatterns = [
     path('devices/', views.devices_index, name="devices_index"),
     path('devices/<int:device_id>', views.devices_show, name='devices_show'),
     path('devices/new', views.Device_Create.as_view(), name="device_create"),
+        path('devices/<int:pk>/', views.Devices_Detail.as_view(), name="devices_detail"),
     path('devices/<int:pk>/update', views.Device_Update.as_view(), name="devices_update"),
     path('devices/<int:pk>/delete', views.Device_Delete.as_view(), name="devices_delete"),
     #Inventory 

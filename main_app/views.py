@@ -10,7 +10,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
-from django.urls import reverse
+from django.urls import reverse, NoReverseMatch
+from django.db.models import F
 
 
 class Home(TemplateView):
@@ -32,6 +33,7 @@ class Employee_Create(LoginRequiredMixin, CreateView):
         self.object.save()
         return HttpResponseRedirect('employees/')
     
+
 @method_decorator(login_required, name="dispatch")
 class Employee_List(TemplateView):
     template_name='employee_list.html'
@@ -50,7 +52,8 @@ class Employee_List(TemplateView):
             context['header']= 'Employees:'
             
         return context
-
+    
+ 
 @method_decorator(login_required, name="dispatch")    
 class Employee_Detail(DetailView):
     model = Employee
@@ -72,6 +75,19 @@ class Employee_Delete(DeleteView):
     template_name = 'employee_delete.html'
     success_url = "/employees/"
 
+
+
+
+@login_required
+def profile(request, username):
+    user = User.objects.get(username=username)
+    devices = Device.objects.filter(user=user)
+    employees = Employee.objects.filter(user=user)
+    return render(request, 'profile.html', {'username': username, 'devices': devices, 'employees':employees})
+
+########################DEVICE################################
+
+
 @method_decorator(login_required, name="dispatch")   
 class Device_List(TemplateView):
     template_name='device_list.html'
@@ -88,17 +104,7 @@ class Device_List(TemplateView):
             context['header']= 'Devices:'
             
         return context
-
-
-@login_required
-def profile(request, username):
-    user = User.objects.get(username=username)
-    devices = Device.objects.filter(user=user)
-    employees = Employee.objects.filter(user=user)
-    return render(request, 'profile.html', {'username': username, 'devices': devices, 'employees':employees})
-
-########################DEVICE################################
-
+    
 @login_required
 def devices_index(request):
     devices = Device.objects.all()
@@ -116,23 +122,45 @@ class Device_Create(CreateView):
     model = Device
     fields = ['name', 'device_type', 'serial_number', 'model_number', 'status','ship_status']
     template_name = "device_create.html"
+    devices = Device.objects.all()
+    inventory_mba = Inventory.objects.filter(name='MBA')
+    inventory_mbp = Inventory.objects.filter(name='MBP')
+    inventory_s = Inventory.objects.filter(name='S')
     
-    # def inventory_update(request, employee, device):
-    #     employee = Employee.objects.get(employee=employee)
-    #     device = Device.objects.get(device=device)
-    #     deduct_inventory = Inventory.objects.update_or_create(user=employee.pk, defaults={'value': 0})
-    
-    def form_valid(self,form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
+    print(devices.device_type)
         
-        device = self.object.save()
-        # for device in employee:
-        #     Device.objects.create(
-        #         user=device,
-        #         device=device)
-            
-        return HttpResponseRedirect('/')
+    inventory_mba.update(in_stock=F('in_stock') - 1)    
+    
+    inventory_mba.update(in_stock=F('in_stock') - 1)
+    inventory_mbp.update(in_stock=F('in_stock') - 1) 
+    inventory_s.update(in_stock=F('in_stock') - 1)           
+    print(inventory_mba)
+    print(inventory_mbp)
+    # def form_valid(self,form):
+    #     self.object = form.save(commit=False)
+    #     self.object.user = self.request.user
+    #     self.object.save()
+        
+        
+        # employee = Employee.objects.get(employee=employee)
+        
+HttpResponseRedirect('/')
+
+
+@method_decorator(login_required, name="dispatch")    
+class Devices_Detail(DetailView):
+    model = Device
+    template_name = "devices_detail.html"
+ 
+
+@method_decorator(login_required, name="dispatch")  
+class Device_Update(UpdateView):
+    model = Employee
+    fields = ['name', 'device_type', 'serial_number', 'model_number', 'status','ship_status']
+    template_name = "devices_update.html"
+    def get_success_url(self):
+        return reverse('devices_detail', kwargs={'pk': self.object.pk})
+    
 
 @method_decorator(login_required, name="dispatch")
 class Device_Update(UpdateView):
