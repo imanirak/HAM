@@ -129,10 +129,11 @@ class Device_Create(CreateView):
         self.object.user = self.request.user
         device_type = self.object.device_type
         device = self.object
-        
         #update name based on last created employee
         employee = Employee.objects.last()
-        device.name = employee
+        device_name = employee
+        
+        device.name = device_name
         device.save(['name'])
         
      
