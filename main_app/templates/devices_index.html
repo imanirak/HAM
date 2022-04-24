@@ -6,11 +6,13 @@
 
 
 {% for device in devices %} 
+
     <div>
         <a href="{% url 'devices_show' device.id %}">
             <div class="card-content">
+        
                 {%for employee in device.employee_set.all%}
-               <h1>{{employee.name}}</h1>
+               <h1>{{employee.name}} Device</h1>
                 <span>{{ device.serial_number }}</span>
             </div>
         </a>

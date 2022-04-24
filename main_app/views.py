@@ -12,6 +12,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 from django.urls import reverse, NoReverseMatch
 from django.db.models import F
+from django.forms import Select
 
 
 class Home(TemplateView):
@@ -118,7 +119,7 @@ def devices_show(request, device_id):
 @method_decorator(login_required, name="dispatch")
 class Device_Create(CreateView):
     model = Device
-    fields = ['name', 'device_type', 'serial_number', 'model_number', 'status','ship_status']
+    fields = [ 'device_type', 'serial_number', 'model_number', 'status','ship_status']
     template_name = "device_create.html"
     devices = Device.objects.all()
     inventory = Inventory.objects.all()
@@ -136,6 +137,7 @@ class Device_Create(CreateView):
         device.name = device_name
         device.save(['name'])
         
+        print(employee.devices.contains())
      
         if device_type == 'MBA':
             inventory_mba = Inventory.objects.filter(name='MBA')       
@@ -151,7 +153,7 @@ class Device_Create(CreateView):
             inventory_s.update(in_stock=F('in_stock') - 1)
 
         
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/employees')
 
 
 @method_decorator(login_required, name="dispatch")    
