@@ -12,6 +12,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 from django.urls import reverse, NoReverseMatch
 from django.db.models import F
+from django.forms import Select
 
 
 class Home(TemplateView):
@@ -24,15 +25,14 @@ class About(TemplateView):
 @method_decorator(login_required, name="dispatch")
 class Employee_Create(LoginRequiredMixin, CreateView):
     model = Employee
-    fields = ['name','first_name', 'last_name', 'department', 'devices']
+    fields = ['name','first_name', 'last_name', 'department']
     template_name = "employee_create.html"
-    
+
     def form_valid(self,form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
-        print(self.object.first_name)
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/devices/new')
     
 
 @method_decorator(login_required, name="dispatch")
@@ -109,41 +109,51 @@ class Device_List(TemplateView):
 @login_required
 def devices_index(request):
     devices = Device.objects.all()
-    print(devices.all())
     return render(request, 'devices_index.html', {'devices':devices})
 
 @login_required
 def devices_show(request, device_id):
     devices = Device.objects.get(id=device_id)
-    #grabbing device employee
-    print(devices.all())
     return render(request, 'devices_show.html', {'devices': devices})
 
 @method_decorator(login_required, name="dispatch")
 class Device_Create(CreateView):
     model = Device
-    fields = ['name', 'device_type', 'serial_number', 'model_number', 'status','ship_status']
+    fields = [ 'device_type', 'serial_number', 'model_number', 'status','ship_status']
     template_name = "device_create.html"
     devices = Device.objects.all()
-       
+    inventory = Inventory.objects.all()
+    
   
     def form_valid(self,form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-        self.object.save()
-        print(self.object)
-        if self.object.device_type == 'MBA':
-            inventory_mba = Inventory.objects.filter(name='MBA')     
+        device_type = self.object.device_type
+        device = self.object
+        #update name based on last created employee
+        employee = Employee.objects.last()
+        device_name = employee
+        
+        device.name = device_name
+        device.save(['name'])
+        
+        print(employee.devices.contains())
+     
+        if device_type == 'MBA':
+            inventory_mba = Inventory.objects.filter(name='MBA')       
             inventory_mba.update(in_stock=F('in_stock') - 1)
-        elif self.object.device_type == 'MBP':
+       
+        elif device_type == 'MBP':
             inventory_mbp = Inventory.objects.filter(name='MBP')     
             inventory_mbp.update(in_stock=F('in_stock') - 1)
-        elif self.object.device_type == 'S':
+  
+            
+        elif self.object.device_type == 'S' :
             inventory_s = Inventory.objects.filter(name='S')     
             inventory_s.update(in_stock=F('in_stock') - 1)
-            
+
         
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/employees')
 
 
 @method_decorator(login_required, name="dispatch")    
@@ -181,7 +191,6 @@ class Device_Delete(DeleteView):
 @login_required
 def inventory_index(request):
     inventory = Inventory.objects.all()
-    print(inventory)
     return render(request, 'inventory_index.html', {'inventory':inventory}, )
 
 
@@ -242,15 +251,9 @@ class Inventory_Add(UpdateView):
         self.object.save()
         add = self.object.add
         print(self.object.name)
-        if self.object.name == 'MBA':
-            inventory_mba = Inventory.objects.filter(name='MBA')     
-            inventory_mba.update(in_stock=F('in_stock') + add)
-        elif self.object.name == 'MBP':
-            inventory_mbp = Inventory.objects.filter(name='MBP')     
-            inventory_mbp.update(in_stock=F('in_stock') + add)
-        elif self.object.name == 'S':
-            inventory_s = Inventory.objects.filter(name='S')     
-            inventory_s.update(in_stock=F('in_stock') + add)
+        if self.object.name == self.object.name:
+            inventory_stock = Inventory.objects.filter(name=f'{self.object.name}')
+            inventory_stock.update(in_stock=F('in_stock') + add)     
             
         
         return HttpResponseRedirect('/inventory')
