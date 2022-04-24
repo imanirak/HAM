@@ -119,6 +119,6 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/devices/'
 LOGOUT_REDIRECT_URL = "/"
 django_heroku.settings(locals())

@@ -15,20 +15,46 @@
 </head>
 <body>
     <nav>
-        <a href="/">HOME</a>
-        <a href="/about">About</a>
-        <a href="/admin">Admin</a>
-        <a href="/employees">All Employees</a>
-        <a href="/employees/new">Create Employees</a>
-        <a href="/devices">All Devices</a>
-        <a href="/devices/new">Create Device</a>
-        <a href="/inventory">Inventory</a>
+        {% if user.is_authenticated %}
+        <div class="loggedin">
+            <ul> 
+                <li><a href="/user/{{user.username}}">Welcome, {{user.username}}!</a></li>
+                <li><a href="/accounts/logout">Logout</a></li>
+
+        </div>
+        <div class="nav-left"> 
+            <ul>
+            <li><a href="/">HOME</a></li>
+            <li><a href="/employees">All Employees</a></li>
+           <li> <a href="/devices">All Devices</a> </li>
+           <li><a href="/inventory">Inventory</a></li> 
+        </ul> 
+        </div>
     </nav>
-    {% block nav %}
-    {% endblock %}
-    {% block body %}
-        {% block content %}
-        {% endblock %}
-    {% endblock %}
-</body>
+
+        {% else %}
+        <div class="loggedin">
+        <ul>
+            <li><span><a href="{% url 'login' %}">Login</a></span></li>
+            <li><span><a href="{% url 'signup' %}">Register</a></span></li>
+        </ul>
+    </div>
+        {% endif %}
+           
+            <div class="content">
+                {% block nav %}
+                {% endblock %}
+                {% block body %}
+                    {% block content %}
+                    {% endblock %}
+                {% endblock %}
+            </body>
+           </div>
+    
+
+           
+   
+    
+  
+   
 </html>

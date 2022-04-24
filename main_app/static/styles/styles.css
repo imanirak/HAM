@@ -1,3 +1,189 @@
-h1 {
-    color:blue;
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@0;1&family=Open+Sans&display=swap');
+
+:root {
+    --light-purple:#F6F5FC;
+    --pale-purple:#B9BDD2;
+    --dark-purple:#8C8FC0;
+    --dark-gray:#565656;
 }
+
+
+/*** login **/
+
+body{
+    background-color:var(--light-purple);
+    width:auto;
+    margin:0;
+}
+
+
+
+.login-page {
+    border-radius:10px;
+    box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+    margin:100px auto auto auto;
+    padding:40px;
+    height:auto;
+    width:250px;
+   
+}
+
+
+.default {
+   display:flex;
+}
+
+.nav-left {
+    all:unset;
+    background-color:white;
+    height:100vh;
+    font-family:Open sans;
+    float:left;
+    text-align: left;
+    width:15%;
+    text-transform: uppercase;
+}
+
+.nav-left a {
+    text-decoration:none;
+    display:block;
+    width:100%;
+    padding-top:20px;
+    padding-left:30px;
+    padding-bottom:20px;
+    color:var(--dark-purple);
+    
+}
+
+.content {
+    justify-content:center;
+    text-align:center;
+    padding-top:50px;
+    margin:0 auto;
+   
+}
+
+.loggedin {
+    background-color:white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    text-align: right;
+    font-family:Libre Baskerville;
+    border-radius:10px;
+
+}
+
+.loggedin a {
+    display:inline-block;
+    padding:15px;
+    color:var(--dark-purple);
+  
+}
+
+.loggedin li {
+    display:inline;
+    
+}
+
+a {
+    text-decoration: none;
+}
+
+
+ ul {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+  }
+  
+ .default  li a {
+    display: block;
+    width: 60px;
+  }
+
+
+.title {
+    font-family:Libre Baskerville;
+    color:var(--dark-purple);
+}
+
+.container {
+    padding-top:200px;
+    display:flex;
+    text-align:center;
+    width:400px;
+    margin:0 auto 200px auto;
+    
+
+}
+.box {
+    font-family:Open sans;
+    padding:40px;
+    border-radius:10px;
+    box-shadow: 0px 11px 25px 2px rgba(0, 0, 0, 0.14);
+}
+
+.search {
+    all:unset;
+     width: 76%;
+      color: var(--dark-purple);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1px;
+      background: rgba(136, 126, 126, 0.04);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      outline: none;
+      box-sizing: border-box;
+      border: 2px solid rgba(0, 0, 0, 0.02);
+     text-transform:capitalize;
+        width:90px;
+        
+}
+
+.register-button {
+    margin-top:50px;
+    text-transform:uppercase;
+    font-family:open sans;
+      color: var(--dark-purple);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1px;
+      background: rgba(136, 126, 126, 0.04);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      outline: none;
+      box-sizing: border-box;
+      border: 2px solid rgba(0, 0, 0, 0.02);
+    width:175px;
+
+  
+}
+
+  input {
+    all:unset;
+     width: 76%;
+      color: var(--dark-gray);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1px;
+      background: rgba(136, 126, 126, 0.04);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      outline: none;
+      box-sizing: border-box;
+      border: 2px solid rgba(0, 0, 0, 0.02);
+    width:175px;
+ 
+  }
+  
+
+
+  
+  
