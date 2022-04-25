@@ -134,6 +134,8 @@ a {
     justify-content: center;
     border-radius:10px;
     width:800px;
+    height:540px;
+    overflow:auto;
 }
 
 
