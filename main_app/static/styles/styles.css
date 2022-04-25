@@ -28,6 +28,10 @@ body{
    
 }
 
+.employee-title {
+    font-size:10px;
+}
+
 
 .default {
    display:flex;
@@ -54,7 +58,7 @@ body{
     
 }
 
-.nav-left a:active, .nav-left a:hover {
+ a:active, a:hover {
     color:var(--dark-gray)
 }
 
@@ -239,11 +243,35 @@ td{
 .employee-info ul li{
     font-family:Libre Baskerville;
     display:inline-block;
+
+}
+
+.employee-info li {
     padding:5px;
-    padding-left:10px;
-    padding-right:10px;
+}
+
+.employee-info ul {
+    padding-right:7em;
+}
+
+.device-info ul {
+    padding-right:3em;
+}
+
+.inventory-info ul li{
+    font-family:Libre Baskerville;
+    display:inline-block;
+
+}
+
+.inventory-info ul {
+    padding-right:12em;
 }
   
+.inventory-info span {
+    font-size:30px;
+    padding:5px;
+}
 
 .employee-info h2 {
     font-size:20px;
@@ -283,6 +311,52 @@ td{
       box-sizing: border-box;
       border: 2px solid rgba(0, 0, 0, 0.02);
     width:175px;
+}
+
+
+
+.inventory-add {
+    margin-top:25px;
+    margin-bottom:25px;
+    margin-left:5em;
+    text-transform:uppercase;
+    font-family:open sans;
+      color: var(--dark-purple);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1px;
+      background: rgba(136, 126, 126, 0.04);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      outline: none;
+      box-sizing: border-box;
+      border: 2px solid rgba(0, 0, 0, 0.02);
+    width:100px;
+}
+
+
+
+.employee-add {
+
+    text-transform:uppercase;
+    font-family:open sans;
+      color: var(--dark-purple);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1px;
+      background: rgba(136, 126, 126, 0.04);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      outline: none;
+      box-sizing: border-box;
+      border: 2px solid rgba(0, 0, 0, 0.02);
+    width:100px;
+}
+
+.employee-edit-button a{
+    padding:0;
 }
 
 .employee-top {
@@ -336,10 +410,30 @@ td{
     font-weight: 700;
     font-size: 14px;
     letter-spacing: 1px;
-
-
     outline: none;
-
-
 }
 
+
+
+.inventory-spacing {
+    padding-left:2em;
+}
+
+.inventory-spacing-value {
+    
+    padding-left:8em;
+}
+
+.employee-title-list {
+    /* padding-right:15em; */
+}
+
+
+a {
+    color:var(--dark-purple);
+}
+
+.create-title {
+    font-family:Libre Baskerville;
+    color:var(--dark-purple);
+}

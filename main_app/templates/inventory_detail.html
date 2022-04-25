@@ -2,8 +2,61 @@
 
 {% block content %}
 
+<div class="employee-top">
+  <div class="box1"> <h1 class="employee-heading">{{inventory.name}} Details</h1></div>
+ <div class="box2"> <a href="{% url 'inventory_index'%}"><button class="create-employee">back</button></a></div>
+</div>
+
 <div class="container">
+
+   <div class="column">  
+        <div class="inventory-info">
+            <ul class="employee-title-list">
+                <li><h2>Item </h2></li>
+                <span>|</span>
+                <li><h2>In Stock</h2></li>
+                
+            </ul>
+        </div>  
     <div>
+      <div>
+
+            <div class="card-content">
+                <table>
+                    <tr class="">
+                        <th>Name</th>
+                        <th>Serial Number</th>           
+                    </tr>
+                    <tr>
+                      <div class="borderlines">
+                        <td class="inventory-spacing">{{inventory.name}} </td>
+                        {% if inventory.in_stock < 1 %}
+                        <td class="inventory-spacing-value"> Out Of Stock</td>
+                        {% else %}
+                        <td class="inventory-spacing-value">{{inventory.in_stock}}</td>
+                       
+
+                        </div>
+                        
+                    </tr>
+                </table>
+
+                {% endif %}
+            
+               
+        
+            </a>
+    
+
+</div>
+
+</div>
+
+
+
+                    
+
+<!-- 
       <h1>{{inventory.name}}</h1>
       <ul>
     
@@ -13,11 +66,11 @@
             <div>{{inventory.in_stock}}</div>
         {% endif %}
     </ul>
-    </div>
+    </div> -->
   
   <div class="update">
-    <a href="{% url 'inventory_add' inventory.pk %}">ADD {{inventory.name}}</a>
-    <a href="{% url 'inventory_delete' inventory.pk %}">Delete {{inventory.name}}</a>
+    <a href="{% url 'inventory_add' inventory.pk %}"><button class="create-employee">ADD {{inventory.name}}</button></a>
+    <a href="{% url 'inventory_delete' inventory.pk %}"><button class="create-employee">Delete {{inventory.name}}</button></a>
 
 </div>
   </div>

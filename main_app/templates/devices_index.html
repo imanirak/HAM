@@ -2,8 +2,31 @@
 {% extends 'base.html' %}
 {% block body %}
 
-<h1>Devices:</h1>
 
+
+<div class="employee-top">
+    <div class="box1"> <h1 class="employee-heading">Device Information</h1></div>
+   <div class="box2"> <a href="{% url 'device_create'%}"><button class="create-employee">+ DEVICE</button></a></div>
+  </div>
+
+<div class="container">
+
+
+    <div class="column">  
+        <div class="employee-info">
+            <ul>
+                <li><h2>Device Name</h2></li>
+                <span> | </span>
+                <li><h2>Serial Number</h2></li>
+                <span> | </span>
+                <li><h2>Model Number</h2></li>
+                <span> | </span>
+                <li><h2>Status</h2></li>
+        
+  
+          
+            </ul>
+        </div>  
 
 {% for device in devices %} 
 
@@ -12,13 +35,34 @@
             <div class="card-content">
         
                 {%for employee in device.employee_set.all%}
-               <h1>{{employee.name}} Device</h1>
-                <span>{{ device.serial_number }}</span>
+
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Serial Number</th>
+                        <th>Model Number</th>
+                        <th>Status</th>
+                        <th>Ship Status</th>
+                    </tr>
+                    <tr>
+                        <div class="borderlines">
+                        <td class="employee-name">{{device.name}} </td>
+                        <td class="employee-device">{{device.serial_number}}</td>
+                        <td class="employee-device-model-number">{{device.model_number}}</td>
+                        <td class="employee-device-status">{{device.status}}</td>
+                        <td class="employee-edit-btn"><a href="{% url 'devices_detail' device.id%}"><button class="employee-add">EDIT</button></a></td> 
+                        </div>
+                        
+                    </tr>
+                </table>
+       
             </div>
-        </a>
-    </div>
+ 
     {% endfor %}
 {% endfor %}
 
 
 {% endblock %}
+
+
+

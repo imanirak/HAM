@@ -29,6 +29,19 @@
   
 </form>
 </li>
+
+{% elif request.get_full_path == "/devices/" %}
+
+<ul> <li><form>
+    <div class="search-bar">
+        <input type="text" name="name" placeholder="name" class="employee-search-bar"/>
+        <input type="submit" value="Search" class="employee-search-btn"/>
+    <a class ="clear" href="{% url 'devices_index' %}">Clear Search</a>
+    </div>
+  
+</form>
+</li>
+
 {% endif %}
                 <li><a href="/">Welcome, {{user.username}}!</a></li>
                 <li><a href="/accounts/logout">Logout</a></li>

@@ -1,12 +1,58 @@
 {% extends 'base.html' %} 
 
 {% block body %}
-<h1>Update {{device.name}} Device</h1>
 
-<form action="" method="post">
-  {% csrf_token %} 
-  {{form.as_p}} 
-  <input type="submit" value="Submit" />
-</form>
+<div class="employee-top">
+  <div class="box1"> <h1 class="employee-heading"></h1></div>
 
+</div>
+
+
+<div class="container">
+  <div class="create-title">
+    <ul>
+  <div class="column">  
+       <div >
+           <ul >
+               <li><h1> Update {{device.name}} Device </h1></li>
+               
+           </ul>
+       </div>  
+   <div>
+     <div>
+
+
+
+
+
+      <div class="card-content">
+        <table>
+            <tr class="">
+                <th>Name</th>
+                <th>Serial Number</th>           
+            </tr>
+            <tr>
+              <div class="borderlines">
+                <td class="inventory-spacing"> 
+                  <form action="" method="post">
+                    {% csrf_token %} 
+                    {{form.as_p}} 
+                    <input type="submit" value="Submit" />
+                  </form>
+                   </td>
+               
+                </div>
+                
+            </tr>
+        </table>
+
+
+       
+
+    </a>
+
+
+</div>
+
+</div>
 {% endblock %}
