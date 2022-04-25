@@ -6,37 +6,58 @@ Employee List
 
 {% block content %}
 
-<form>
-    <div>
-      
-        <!-- <input type="text" name="name" placeholder="name"/>
-        <input type="submit" value="Search"/>
-    <a class ="clear" href="{% url 'employee_list' %}">Clear Search</a> -->
-    </div>
-  
-</form>
 
-<h1>{{header}}</h1>
+
+<div class="employee-top">
+    <div class="box1"> <h1 class="employee-heading">Employee Information</h1></div>
+   <div class="box2"> <a href="{% url 'employee_create'%}"><button class="create-employee">+ EMPLOYEE</button></a></div>
+   
+  </div>
+
 <div class="container">
 
-  
 
-    <div class="column">    
+
+    <div class="column">  
+        <div class="employee-info">
+            <ul>
+                <li><h2>Name</h2></li>
+                <span> | </span>
+                <li><h2>Serial Number</h2></li>
+                <span> | </span>
+                <li><h2>Model Number</h2></li>
+                <span> | </span>
+                <li><h2>Status</h2></li>
+                <span> | </span>
+                <li><h2>Ship Status</h2></li>
+            </ul>
+        </div>  
         {% for employee in employees %}
             <a href="{% url 'employee_detail' employee.pk %}">
-                <h3>Name: {{employee.first_name}} {{employee.last_name}}</h3>
-                {% for device in employee.devices.all%}
-               
-              {% if employee.devices.all is None %}
-                <h3>Device: Awaiting Device</h3>
-                {% else %}
-                <h3>Device: {{device.serial_number}}</h3>
-                {% endif %}  
-           
-            {% endfor %}
-            </a>
-    
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Serial Number</th>
+                        <th>Model Number</th>
+                        <th>Status</th>
+                        <th>Ship Status</th>
+                    </tr>
+                    <tr>
+                        <div class="borderlines">
+                        <td class="employee-name">{{employee.first_name}} {{employee.last_name}}</td>
+                        {% for device in employee.devices.all %}
+                        <td class="employee-device">{{device.serial_number}}</td>
+                        <td class="employee-device-model-number">{{device.model_number}}</td>
+                        <td class="employee-device-status">{{device.status}}</td>
+                        <td class="employee-device-ship-status">{{device.ship_status}}</td>
+                        </div>
+                        
+                    </tr>
+                </table>
 
+            {% endfor %}
+           
+    
         {% endfor %}
 </div>
 
