@@ -1,12 +1,59 @@
 {% extends 'base.html' %} 
 
 {% block content %}
-<h1>Update {{employee.name}}</h1>
+<div class="employee-top">
+  <div class="box1"> <h1 class="employee-heading"></h1></div>
 
-<form action="" method="post">
-  {% csrf_token %} 
-  {{form.as_p}} 
-  <input type="submit" value="Submit" />
-</form>
+</div>
+
+
+<div class="container">
+  <div class="create-title">
+    <ul>
+  <div class="column">  
+       <div >
+           <ul >
+               <li><h1>Update {{employee.name}}</h1></li>
+               
+           </ul>
+       </div>  
+   <div>
+     <div>
+
+
+      <div class="card-content">
+        <table>
+            <tr class="">
+                <th>Name</th>
+                <th>Serial Number</th>           
+            </tr>
+            <tr>
+              <div class="borderlines">
+                <td class="inventory-spacing"> 
+                  <form action="" method="post">
+                    {% csrf_token %} 
+                    {{form.as_p}} 
+                    <input type="submit" value="Submit" />
+
+<a href="{% url 'employee_delete' employee.pk %}"><button class="create-employee">DELETE EMPLOYEE</button> </a>
+
+                  </form>
+                   </td>
+               
+                </div>
+                
+            </tr>
+        </table>
+
+
+       
+
+    </a>
+
+
+</div>
+
+</div>
+
 
 {% endblock %}

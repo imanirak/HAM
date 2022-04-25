@@ -1,14 +1,63 @@
 {% extends 'base.html' %} 
 
 {% block content %}
-<h1>Are you sure you want to delete {{inventory.name}}?</h1>
+
+<div class="employee-top">
+  <div class="box1"> <h1 class="employee-heading">Add Stock to {{inventory.name}}</h1></div>
+ <div class="box2"> <a href="{% url 'inventory_detail' inventory.pk %}"><button class="create-employee">back</button></a></div>
+</div>
+
+
+<div class="container">
+
+  <div class="column">  
+       <div >
+           <ul >
+               <li><h1>Are you sure you want to delete {{inventory.name}}?</h1></li>
+               
+           </ul>
+       </div>  
+   <div>
+     <div>
+
+
+      <div class="card-content">
+        <table>
+            <tr class="">
+                <th>Name</th>
+                <th>Serial Number</th>           
+            </tr>
+            <tr>
+              <div class="borderlines">
+                <td class="inventory-spacing"> 
+               
+                  
+                  </form>
+                   </td>
+               
+                </div>
+                
+            </tr>
+        </table>
+
+
+       
+
+    </a>
+
+
+</div>
+
+</div>
+
+
 <form method="post">
   {% csrf_token %}
   <div>
 
     <input type="submit" value="Confirm" />
-
-    <a href="{% url 'inventory_detail' inventory.pk %}"><button>cancel</button></a>
+    <a href="{% url 'inventory_detail' inventory.pk%}"><button class="inventory-add">CANCEL</button>
+ 
   </div>
 </form>
 {% endblock %}

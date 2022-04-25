@@ -10,9 +10,10 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
-from django.urls import reverse, NoReverseMatch
+from django.urls import reverse
 from django.db.models import F
 from django.forms import Select
+
 
 
 class Home(TemplateView):
@@ -42,13 +43,19 @@ class Employee_List(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         name = self.request.GET.get('name')
-        
-        if name != None:
-            context['employees']=Employee.objects.filter(name__icontains=name)
-            context['header']= f'Searching for {name}'
-        else:
-            context['employees']=Employee.objects.all()
-            context['devices']=Device.objects.all()
+        employees = Employee.objects.all()
+        for employee in employees:
+            for device in employee.devices.all():
+                if device.name == employee.name:
+                    print(device.name)
+                    print(employee.name)
+                    Select()
+                if name != None:
+                    context['employees']=Employee.objects.filter(name__icontains=name)
+                    context['header']= f'Searching for {name}'
+                else:
+                    context['employees']=Employee.objects.all()
+                    context['devices']=Device.objects.all()
             
             context['header']= 'Employees:'
             
@@ -130,6 +137,7 @@ class Device_Create(CreateView):
         self.object.user = self.request.user
         device_type = self.object.device_type
         device = self.object
+        print(device)
         #update name based on last created employee
         employee = Employee.objects.last()
         device_name = employee
@@ -137,7 +145,7 @@ class Device_Create(CreateView):
         device.name = device_name
         device.save(['name'])
         
-        print(employee.devices.contains())
+        # print(employee.devices.contains())
      
         if device_type == 'MBA':
             inventory_mba = Inventory.objects.filter(name='MBA')       
@@ -191,6 +199,7 @@ class Device_Delete(DeleteView):
 @login_required
 def inventory_index(request):
     inventory = Inventory.objects.all()
+    print(inventory)
     return render(request, 'inventory_index.html', {'inventory':inventory}, )
 
 

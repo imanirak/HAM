@@ -1,32 +1,55 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<form>
-    <div>
-      
-        <input type="text" name="name" placeholder="name"/>
-        <input type="submit" value="Search"/>
- 
-    </div>
-  
-</form>
+
+<div class="employee-top">
+    <div class="box1"> <h1 class="employee-heading">Inventory Information</h1></div>
+   <div class="box2"> <a href="{% url 'inventory_create'%}"><button class="inventory-add">+ {{inventory.name}}</button></a></div>
+  </div>
+
 
 <div class="container">
 
-  
-    <div class="column">    
-        <h1>Inventory</h1>
-        {% for inventory in inventory %}
-        <a href="{% url 'inventory_detail' inventory.pk %}">
 
-                <h2>Item:{{inventory.name}}</h2>
-                {% if inventory.in_stock < 1 %}
-                <h3>Currently out of stock</h3>
-                {% elif inventory.in_stock <= 5 %}
-                <h3>replenish stock</h3>
-                <h3>{{inventory.in_stock}}</h3>
-                {% else %}
-                    <div>{{inventory.in_stock}}</div>
+    <div class="column">  
+        <div class="inventory-info">
+            <ul class="employee-title-list">
+                <li><h2>Item |</h2></li>
+                <span></span>
+                <li><h2>In Stock</h2></li>
+                
+            </ul>
+        </div>  
+
+        {% for inventory in inventory %}
+        <div class="inventory-index-a">
+            <a href="{% url 'inventory_detail' inventory.pk %}" class="">
+                <div class="card-content">
+      
+                    <table>
+                        <tr class="">
+                            <th>Name</th>
+                            <th>Serial Number</th>
+
+               
+                        </tr>
+                        <tr>
+                            <div class="borderlines">
+                            <td class="inventory-spacing">{{inventory.name}} </td>
+                          
+                            {% if inventory.in_stock < 1 %}
+                            <td class="inventory-spacing-value"> Out Of Stock</td>
+                            <td><a href="{% url 'inventory_detail' inventory.id%}"><button class="inventory-add">EDIT</button></a></td> 
+                            {% else %}
+                            <td class="inventory-spacing-value">{{inventory.in_stock}}</td>
+                            <td><a href="{% url 'inventory_detail' inventory.id%}"><button class="inventory-add">EDIT </button></a></td> 
+
+                            </div>
+                            
+                        </tr>
+                    </table>
+   
+
                 {% endif %}
             
                

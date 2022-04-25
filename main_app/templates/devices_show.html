@@ -2,22 +2,63 @@
 
 {% block content %}
 
+<div class="employee-top">
+  <div class="box1"> <h1 class="employee-heading"></h1></div>
+  
+
+</div>
+
+
 <div class="container">
-  <div>
-    <h1>{{devices.name}} Device</h1>
+  <div class="create-title">
     <ul>
-          <h4>{{devices.name}}</h4>
-          <h4>{{devices.device_type}}</h4>
-          <h4>{{devices.serial_number}}</h4>
-          <h4>{{devices.model_number}}</h4>
-          <h4>{{devices.status}}</h4>
-          <h4>{{devices.ship_status}}</h4>
-  </ul>
-  </div>
+  <div class="column">  
+       <div >
+           <ul >
+               <li><h1> {{devices.name}} Device </h1></li>
+               
+           </ul>
+       </div>  
+   <div>
+     <div>
+
+        <div class="card-content">
+          <table>
+              <tr class="">
+                  <th>Name</th>
+                  <th>Serial Number</th>           
+              </tr>
+              <tr>
+                <div class="borderlines">
+                  <td class="inventory-spacing"> <h4>{{devices.name}}</h4> </td>
+                  <td class="inventory-spacing">  <h4>{{devices.device_type}}</h4> </td>
+                  <td class="inventory-spacing">  <h4>{{devices.serial_number}}</h4> </td>
+                  <td class="inventory-spacing">  <h4>{{devices.model_number}}</h4> </td>
+                  <td class="inventory-spacing">  <h4>{{devices.status}}</h4> </td>
+                  <td class="inventory-spacing">  <h4>{{devices.ship_status}}</h4> </td>
+
+                
+
+
+                  </div>
+                  
+              </tr>
+          </table>
+
+      
+         
+  
+      </a>
+
+
+</div>
+
+</div>
+
   
   <di class="update">
-    <a href="{% url 'devices_update' devices.pk %}">Edit Device</a>
-    <a href="{% url 'devices_delete' devices.id %}">Delete Device</a>
+    <a href="{% url 'devices_update' devices.pk %}"><button class="create-employee">Edit Device</button> </a>
+    <a href="{% url 'devices_delete' devices.id %}"><button class="create-employee">Delete Device</button> </a>
 
 </div>
   </div>

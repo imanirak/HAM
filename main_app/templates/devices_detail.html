@@ -2,21 +2,65 @@
 
 {% block content %}
 
-<div class="container">
-    <div>
-      <h1>{{device.name}} Device</h1>
-      <ul>
-        {% for employee in devices.employee.all %}
-            <h4>{{employee.name}}</h4>
-        {% empty %}
-            <div>No Devices currently assigned to user.</div>
-        {% endfor %}
-    </ul>
-    </div>
+
+<div class="employee-top">
+  <div class="box1"> <h1 class="employee-heading"></h1></div>
+  <div class="box2"> <a href="{% url 'devices_index' %}"><button class="create-employee">back</button></a></div>
   
+
+</div>
+
+
+<div class="container">
+  <div class="create-title">
+    <ul>
+  <div class="column">  
+       <div >
+           <ul >
+               <li><h1> Edit {{employee.name}} </h1></li>
+               
+           </ul>
+       </div>  
+   <div>
+     <div>
+
+
+      <div class="card-content">
+        <table>
+            <tr class="">
+                <th>Name</th>
+                <th>Serial Number</th>           
+            </tr>
+            <tr>
+              <div class="borderlines">
+                {% for employee in devices.employee.all %}
+                <td class="inventory-spacing"> Name: {{device.name}} </td>
+                {% empty %}
+                <td class="inventory-spacing"> No Device currently assigned to Employee. </td>
+
+                
+                {% endfor %}
+                
+
+                </div>
+                
+            </tr>
+        </table>
+
+    
+       
+
+    </a>
+
+
+</div>
+
+</div>
+
   <div class="update">
-    <a href="{% url 'devices_update' device.pk %}">Edit {{device.device_type}}</a>
-    <a href="{% url 'devices_delete' device.pk %}">Delete {{device.device_type}}</a>
+    <a href="{% url 'employee_list'%}"><button class="create-employee">ASSIGN DEVICE</button></a>
+    <a href="{% url 'devices_update' device.pk %}"><button class="create-employee">Edit {{device.device_type}}</button></a>
+    <a href="{% url 'devices_delete' device.pk %}"><button class="create-employee">Delete {{device.device_type}}</button></a>
 
 </div>
   </div>

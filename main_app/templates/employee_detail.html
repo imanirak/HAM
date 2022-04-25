@@ -2,6 +2,56 @@
 
 {% block content %}
 
+
+<div class="employee-top">
+  <div class="box1"> <h1 class="employee-heading"></h1></div>
+  <div class="box2"> <a href="{% url 'employee_list' %}"><button class="create-employee">back</button></a></div>
+  
+
+</div>
+
+
+<div class="container">
+  <div class="create-title">
+    <ul>
+  <div class="column">  
+       <div >
+           <ul >
+               <li><h1> Edit {{employee.name}} </h1></li>
+               
+           </ul>
+       </div>  
+   <div>
+     <div>
+
+        <div class="card-content">
+          <table>
+              <tr class="">
+                  <th>Name</th>
+                  <th>Serial Number</th>           
+              </tr>
+              <tr>
+                <div class="borderlines">
+                  <td class="inventory-spacing"> Name: {{employee.name}} </td>
+                  <td class="inventory-spacing"> Department: {{employee.department}} </td>
+                
+
+
+                  </div>
+                  
+              </tr>
+          </table>
+
+      
+         
+  
+      </a>
+
+
+</div>
+
+</div>
+<!-- 
 <div class="container">
   <div>
    <h1>{{employee.first_name}}</h1>
@@ -14,12 +64,13 @@
       {% endfor %}
   </ul>
   </div>
-  
+   -->
   <di class="update">
-    <a href="{% url 'employee_update' employee.pk %}">Edit Employee</a>
-    <a href="{% url 'employee_delete' employee.pk %}">Delete Employee</a>
+    <a href="{% url 'employee_update' employee.pk %}"><button class="create-employee">EDIT</button> </a>
+    <a href="{% url 'employee_delete' employee.pk %}"><button class="create-employee">Delete </button></a>
 
 </div>
+
   </div>
 </div>
 

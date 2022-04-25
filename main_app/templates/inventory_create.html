@@ -1,20 +1,60 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="contain">
-    <h1>Add new item to Inventory</h1>
-    <form method="post">
-        <!-- Security Feature  -->
-        {% csrf_token %} 
-        <!--  Generate inputs  -->
-        {{form.as_p}} 
-        <!--  Submit form  -->
-          <input type="submit" value="Submit" />
-          {% endblock %}
-    </form>
-  
-
-  </div>
-  
+<div class="employee-top">
+  <div class="box1"> <h1 class="employee-heading"></h1></div>
   
 </div>
+
+
+<div class="container">
+  <div class="create-title">
+    <ul>
+  <div class="column">  
+       <div >
+           <ul >
+               <li><h1> Add to Inventory </h1></li>
+               
+           </ul>
+       </div>  
+   <div>
+     <div>
+       
+
+
+
+      <div class="card-content">
+        <table>
+            <tr class="">
+                <th>Name</th>
+                <th>Serial Number</th>           
+            </tr>
+            <tr>
+              <div class="borderlines">
+                <td class="inventory-spacing"> 
+                  <form action="" method="post">
+                    {% csrf_token %} 
+                    {{form.as_p}} 
+                    <input type="submit" value="Submit" />
+               <a href="{% url 'inventory_index' %}"><button class="create-employee">CANCEL</button></a>
+                  </form>
+                   </td>
+                   <td>
+               
+                </div>
+                
+            </tr>
+        </table>
+
+
+       
+
+    </a>
+
+
+</div>
+
+</div>
+
+      {% endblock %}
+
