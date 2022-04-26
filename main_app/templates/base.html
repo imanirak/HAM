@@ -1,5 +1,5 @@
 {% load static %}
-
+<link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,46 +14,70 @@
     </title>
 </head>
 <body>
-    <nav>
+    <nav class="full-screen">
         {% if user.is_authenticated %}
-        <div class="loggedin">
+        <!-- <div class="loggedin">
+      
+            <ul> 
+                <li> 
+                    <a class='ham-link' href="https://ham-system.herokuapp.com/"><img alt="ham" src==""
+                        width=50" height="50"></a></li>
+                    
+                <li>
+                <div class="search-bar">
+                    <form>
+                        <input type="text" name="name" placeholder="name" class="employee-search-bar"/>
+                        <input type="submit" value="Search" class="employee-search-btn"/>
+                    <a class ="clear" href="{% url 'devices_index' %}">Clear Search</a>
+                    </form>
+                    
+                </div>
+         
+                </li>
+                <div class="welcome">
+                    <ul>
+                        <li><a href="/">Welcome, {{user.username}}!</a></li>
+                        <li><a href="/accounts/logout">Logout</a></li>
+                    </ul>
+                  
+                </div>
+            </ul>
+
+
+</div> -->
         
-            {% if request.get_full_path == "/employees/" %}
-            
-            <ul> <li><form>
-    <div class="search-bar">
-        <input type="text" name="name" placeholder="name" class="employee-search-bar"/>
-        <input type="submit" value="Search" class="employee-search-btn"/>
-    <a class ="clear" href="{% url 'employee_list' %}">Clear Search</a>
+
+    <!-- RESPONSIVE TOP NAV -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <section class="top-nav">
+    <div class="logo">
+        <a href="https://ham-system.herokuapp.com/">
+            <img alt="ham" src="{% static "images/logo.png" %}"
+            width=10" height="10">
     </div>
-  
-</form>
-</li>
 
-{% elif request.get_full_path == "/devices/" %}
+    <input id="menu-toggle" type="checkbox" />
+    <label class='menu-button-container' for="menu-toggle">
+    <div class='menu-button'></div>
+  </label>
+    <ul class="menu">
+     
+        <li><a href="/">Home</a></li>
+        <li><a href="/employees">All Employees</a></li>
+       <li> <a href="/devices">All Devices</a> </li>
+       <li><a href="/inventory">Inventory</a></li> 
+       <li><a href="/">Welcome, {{user.username}}!</a></li>
+       <li><a href="/accounts/logout">Logout</a></li>
+    </ul>
+  </section>
 
-<ul> <li><form>
-    <div class="search-bar">
-        <input type="text" name="name" placeholder="name" class="employee-search-bar"/>
-        <input type="submit" value="Search" class="employee-search-btn"/>
-    <a class ="clear" href="{% url 'devices_index' %}">Clear Search</a>
-    </div>
-  
-</form>
-</li>
 
+<!-- LEFT SIDE NAV  -->
 
-{% endif %}
-                <li><a href="/">Welcome, {{user.username}}!</a></li>
-                <li><a href="/accounts/logout">Logout</a></li>
-                
-
- 
-
-        </div>
         <div class="nav-left"> 
-            <ul>
-            <li><a href="/">HOME</a></li>
+            <ul>  
+            <li class="home-option"><a href="/">Home</a></li>
             <li><a href="/employees">All Employees</a></li>
            <li> <a href="/devices">All Devices</a> </li>
            <li><a href="/inventory">Inventory</a></li> 
@@ -61,14 +85,24 @@
         </div>
     </nav>
 
-        {% else %}
+ {% else %}
         <div class="loggedin">
-        <ul>
-            <li><span><a href="{% url 'login' %}">Login</a></span></li>
-            <li><span><a href="{% url 'signup' %}">Register</a></span></li>
+            
+        <ul><li> 
+            <a class='ham-link' href="https://ham-system.herokuapp.com/"><img alt="ham" src="../static/favicon.ico"
+                width=50" height="50"></a></li>
+                <div class="welcome">
+                    <ul>
+                        <li><span><a href="{% url 'login' %}">Login</a></span></li>
+                        <li><span><a href="{% url 'signup' %}">Register</a></span></li>
+                    </ul>
+                  
+                </div>
+                          
+           
         </ul>
     </div>
-        {% endif %}
+      {% endif %}
            
             <div class="content">
                 {% block nav %}

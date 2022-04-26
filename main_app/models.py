@@ -4,39 +4,39 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 DEPARTMENT_CHOICES = (
-    ('Clinical Ops','Clinical Operations'),
+    ('Clinical Operations','Clinical Ops'),
     ('Coaching','Coaching'),
-    ('Com' ,'Commerical'),
-    ('data','Data'),
-    ('Eng', 'Engineering'),
-    ('Exec','Executive'),
-    ('Fin','Finance'),
+    ('Commerical','Com' ),
+    ('Data','data'),
+    ('Engineering', 'Eng'),
+    ('Executive','Exec'),
+    ('Finance','Fin'),
     ('IT', 'IT'),
     ('Legal','Legal'),
-    ('MKTG','Marketing'),
-    ('MX','Member Experience'),
-    ('Ops','Operations'),
-    ('Prod','Product'),
-    ('P&C','Program & Content'),
-    ('Strat Init','Strategic Initatives'),
-    ('Strat','Strategy'),
-    ('Tal&PPL','Talent & People')
+    ('Marketing','MKGT'),
+    ('Member Experience','MX'),
+    ('Operations','Ops'),
+    ('Product','Prod'),
+    ('Program & Content','P&C'),
+    ('Strategic Initatives','Strat Init'),
+    ('Strategy','Strat'),
+    ('Talent & People','Tal&PPL')
 )
 
 
 STATUS_CHOICES = (
    ('NEW','NEW'),
-   ('IR','In-Repair'),
-   ('S','Shipped'),
-   ('D','Damaged'),
-   ('R','Repaired'),
-   ('JO','Junk Out')
+   ('In-Repair','IR'),
+   ('Shipped','S'),
+   ('Damaged','D'),
+   ('Repaired','R'),
+   ('Junk Out','JO')
 )
 
 DEVICE_CHOICES = (
     ('MBA','MacBook Air'),
    ('MBP','MacBook Pro'),
-   ('S','Microsoft Surface'),
+   ('Surface','Microsoft Surface'),
 
 )
 
