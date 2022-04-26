@@ -110,15 +110,15 @@ table {
   
 }
 
-img {
+/* img {
     float:left;
-     padding-left:3em;
-   /* padding-bottom:3em; */
+    padding-left:3em;
+    padding-bottom:3em;
 }
 
 .loggedin img {
     margin:0;
-} 
+} */
 
 
 .loggedin ul li {
