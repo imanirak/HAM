@@ -1,10 +1,72 @@
 {% extends 'login-style.html' %} 
 
 {% block body %}
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-  </form>
-{% endblock %} 
+
+
+<div class="employee-top">
+
+
+<div class="employee-top">
+  <div class="box1"> <h1 class="employee-heading"></h1></div>
+ 
+  
+
+</div>
+
+</div>
+
+
+<div class="container">
+  <div class="create-title">
+    <ul>
+  <div class="column">  
+       <div >
+           <ul >
+               <li><h1> Sign Up </h1></li>
+               
+           </ul>
+       </div>  
+   <div>
+     <div>
+
+
+     <div>
+
+
+
+
+
+      <div class="card-content">
+        <table>
+            <tr class="">
+                <th>Name</th>
+                <th>Serial Number</th>           
+            </tr>
+            <tr>
+              <div class="borderlines">
+                <td class="inventory-spacing"> 
+                  <form class='signup-form' action="" method="post">
+                    {% csrf_token %} 
+                    {{form.as_p}} 
+                    <input class='signup' type="submit" value="Submit" />
+                    
+                  </form>
+                   </td>
+               
+                </div>
+                
+            </tr>
+        </table>
+
+
+       
+
+    </a>
+
+
+</div>
+
+</div>
+
+<a href="{% url 'home' %}"><button class="back-home">CANCEL</button></a>
+{% endblock %}

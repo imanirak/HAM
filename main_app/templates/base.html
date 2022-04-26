@@ -44,11 +44,15 @@
             </ul>
 
 
-</div> -->
+</div> 
+
+
         
 
     <!-- RESPONSIVE TOP NAV -->
 
+
+    
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <section class="top-nav">
     <div class="logo">
@@ -58,13 +62,21 @@
             </a>
 
     </div>
+    <div class="search-bar">
+        <form>
+            <input type="text" name="name" placeholder="name" class="employee-search-bar"/>
+            <input type="submit" value="Search" class="employee-search-btn"/>
+        <a class ="clear" href="{% url 'devices_index' %}">Clear Search</a>
+        </form>
+        
+    </div>
 
     <input id="menu-toggle" type="checkbox" />
     <label class='menu-button-container' for="menu-toggle">
     <div class='menu-button'></div>
+    
   </label>
     <ul class="menu">
-    
         <li><a href="/employees">All Employees</a></li>
         <li> <a href="/devices">All Devices</a> </li>
         <li><a href="/inventory">Inventory</a></li> 
