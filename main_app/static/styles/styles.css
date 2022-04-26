@@ -142,17 +142,19 @@ a {
 
 .welcome  {
     list-style:none;
+    padding-top:1em;
 }
 
 .welcome li {
-    padding-top:0;
+    
     display:inline;
     padding-right:1em;
+
 }
 
-.welcome a {
+/* .welcome a {
     padding-bottom:1em;
-}
+} */
 
  ul {
     list-style-type:none;
@@ -178,12 +180,10 @@ a {
     background-color:white;
     justify-content: center;
     border-radius:10px;
-    width:60vw;
+    width:55vw;
     height:60vh;
     overflow:auto;
 }
-
-
 
 
 
@@ -295,6 +295,7 @@ td{
   
   .employee-info h2 {
       padding-left:1em;
+      font-family:Libre Baskerville;
   }
 
 .employee-info ul li{
@@ -330,10 +331,6 @@ td{
     padding:5px;
 }
 
-.employee-info h2 {
-    font-size:2.5vh;
-    font-family:Libre Baskerville;
-}
 
 .employee-info span {
     font-size:30px;
@@ -372,9 +369,32 @@ td{
 }
 
 
+.back-home {
+    margin-top:25px;
+    margin-bottom:25px;
+ 
+    text-transform:uppercase;
+    font-family:open sans;
+      color: var(--dark-purple);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1px;
+      background: rgba(136, 126, 126, 0.04);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      outline: none;
+      box-sizing: border-box;
+      border: 2px solid rgba(0, 0, 0, 0.02);
+    max-width:100%;
+}
+
+
+
 
 .inventory-add {
-    margin-top:25px;
+    margin:5px;
+        margin-top:25px;
     margin-bottom:25px;
     margin-left:5em;
     text-transform:uppercase;
@@ -396,7 +416,7 @@ td{
 
 
 .employee-add {
-
+    margin:5px;
     text-transform:uppercase;
     font-family:open sans;
       color: var(--dark-purple);
@@ -423,13 +443,15 @@ td{
     padding-top:40px;
 }
 
+
+
 img {
     padding-right:10em;
 }
 
 .search-bar {
-    padding-top:0.2em;
-    padding-left:10em;
+    padding-top:0.5em;
+    padding-right:6em;
 }
 
 .weclome-info il  {
@@ -503,15 +525,25 @@ a {
     color:var(--dark-purple);
 }
 
+
+
+
+
+
+
+
+
+
+
 @media only screen and (max-width: 1500px) {
   
     .employee-search-bar, .employee-search-btn, .clear {
         display:none;
     }
 
-.welcome {
+/* .welcome {
     font-size:2vh;
-}
+} */
 
 }
 
@@ -535,10 +567,7 @@ a {
   }
   }
 
-
-
-
-  @import url(https://fonts.googleapis.com/css?family=Raleway);
+  
 h2 {
   vertical-align: center;
   text-align: center;
@@ -572,6 +601,7 @@ html, body {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 
 .menu > li {
@@ -596,7 +626,7 @@ html, body {
 .menu-button::before,
 .menu-button::after {
   display: block;
-  background-color: #fff;
+  background-color: var(--dark-purple);
   position: absolute;
   height: 4px;
   width: 30px;
@@ -620,7 +650,7 @@ html, body {
 }
 
 #menu-toggle:checked + .menu-button-container .menu-button {
-  background: rgba(255, 255, 255, 0);
+  background:white;
 }
 
 #menu-toggle:checked + .menu-button-container .menu-button::after {
@@ -632,6 +662,10 @@ html, body {
   .menu-button-container {
     display: flex;
   }
+
+  /* .menu {
+      display:none;
+  } */
   
   .menu {
     position: absolute;
@@ -653,7 +687,7 @@ html, body {
   }
 
   #menu-toggle:checked ~ .menu li {
-    border: 1px solid #333;
+    border: 1px solid var(--light-purple);
     height: 2.5em;
     padding: 0.5em;
     transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
@@ -666,8 +700,29 @@ html, body {
     padding: 0.5em 0;
     width: 100%;
     color: white;
-    background-color: #222;
+    background-color: white;
   }
   .menu > li:not(:last-child) {
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid var(--pale-purple);
   }
+}
+
+
+.signup-form { 
+    margin: 0 auto; 
+    width:auto;
+    text-align:left;
+    }
+
+   .signup input[type=submit] ,input[value=Submit]{
+        margin-left:12em;
+        margin-top:2em;
+
+    }
+
+    input{
+        text-align:center;
+        align-self: center;
+    }
+
+  
