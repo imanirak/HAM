@@ -53,8 +53,10 @@
   <section class="top-nav">
     <div class="logo">
         <a href="https://ham-system.herokuapp.com/">
-            <img alt="ham" src="{% static "images/logo.png" %}"
-            width=10" height="10">
+            <img alt="ham" src="../static/images/logo.png"
+            width=50" height="50">
+            </a>
+
     </div>
 
     <input id="menu-toggle" type="checkbox" />
@@ -62,11 +64,10 @@
     <div class='menu-button'></div>
   </label>
     <ul class="menu">
-     
-        <li><a href="/">Home</a></li>
+    
         <li><a href="/employees">All Employees</a></li>
-       <li> <a href="/devices">All Devices</a> </li>
-       <li><a href="/inventory">Inventory</a></li> 
+        <li> <a href="/devices">All Devices</a> </li>
+        <li><a href="/inventory">Inventory</a></li> 
        <li><a href="/">Welcome, {{user.username}}!</a></li>
        <li><a href="/accounts/logout">Logout</a></li>
     </ul>
@@ -74,7 +75,7 @@
 
 
 <!-- LEFT SIDE NAV  -->
-
+<!-- 
         <div class="nav-left"> 
             <ul>  
             <li class="home-option"><a href="/">Home</a></li>
@@ -83,14 +84,13 @@
            <li><a href="/inventory">Inventory</a></li> 
         </ul> 
         </div>
-    </nav>
+    </nav> -->
 
  {% else %}
         <div class="loggedin">
             
-        <ul><li> 
-            <a class='ham-link' href="https://ham-system.herokuapp.com/"><img alt="ham" src="../static/favicon.ico"
-                width=50" height="50"></a></li>
+        <ul>
+           
                 <div class="welcome">
                     <ul>
                         <li><span><a href="{% url 'login' %}">Login</a></span></li>
