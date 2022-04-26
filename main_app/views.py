@@ -113,6 +113,7 @@ class Device_List(TemplateView):
             
         return context
     
+    
 @login_required
 def devices_index(request):
     devices = Device.objects.all()

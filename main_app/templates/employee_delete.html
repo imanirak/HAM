@@ -1,14 +1,65 @@
 {% extends 'base.html' %} 
 
 {% block content %}
-<h1>Are you sure you want to delete {{employee.name}}?</h1>
-<form method="post">
-  {% csrf_token %}
-  <div>
-   <!-- confirm employee delete -->
-    <input type="submit" value="Confirm" />
-    <!-- Redirect back to detail on cancel -->
-    <a href="{% url 'employee_detail' employee.pk %}">Cancel</a>
-  </div>
-</form>
+
+
+
+<div class="employee-top">
+  <div class="box1"> <h1 class="employee-heading"></h1></div>
+  <div class="box2"> </div>
+  
+
+</div>
+
+
+<div class="container">
+  <div class="create-title">
+    <ul>
+  <div class="column">  
+       <div >
+           <ul >
+               <li><h1>Delete Employee</h1>
+               </li>
+               
+           </ul>
+       </div>  
+   <div>
+     <div>
+
+
+
+
+      <div class="delete-content">
+        <table>
+            <tr class="">
+                <th>Name</th>
+                <th>Serial Number</th>           
+            </tr>
+            <tr>
+              <div class="borderlines">
+                <td class="inventory-spacing"> 
+                    <form action="" method="POST">
+
+                      <h1>Are you sure you want to delete {{employee.name}}?</h1>
+                        {% csrf_token %}
+                        <input type="submit" value="Yes - Delete">
+                        <a href="{% url 'employee_detail' employee.pk %}">Cancel</a>
+                    </form>
+                   </td>
+               
+                </div>
+                
+            </tr>
+        </table>
+
+
+       
+
+    </a>
+
+
+</div>
+
+</div>
+
 {% endblock %}

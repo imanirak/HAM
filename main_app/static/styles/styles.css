@@ -294,6 +294,7 @@ td{
   }
   
   .employee-info h2 {
+      font-size:20px;
       padding-left:1em;
       font-family:Libre Baskerville;
   }
@@ -714,7 +715,7 @@ html, body {
     text-align:left;
     }
 
-   .signup input[type=submit] ,input[value=Submit]{
+   .signup {
         margin-left:12em;
         margin-top:2em;
 
@@ -725,4 +726,6 @@ html, body {
         align-self: center;
     }
 
-  
+  .delete-content {
+   padding-top:20px;
+  }

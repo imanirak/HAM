@@ -16,60 +16,48 @@
 <body>
     <nav class="full-screen">
         {% if user.is_authenticated %}
-        <!-- <div class="loggedin">
-      
-            <ul> 
-                <li> 
-                    <a class='ham-link' href="https://ham-system.herokuapp.com/"><img alt="ham" src==""
-                        width=50" height="50"></a></li>
-                    
-                <li>
-                <div class="search-bar">
-                    <form>
-                        <input type="text" name="name" placeholder="name" class="employee-search-bar"/>
-                        <input type="submit" value="Search" class="employee-search-btn"/>
-                    <a class ="clear" href="{% url 'devices_index' %}">Clear Search</a>
-                    </form>
-                    
-                </div>
-         
-                </li>
-                <div class="welcome">
-                    <ul>
-                        <li><a href="/">Welcome, {{user.username}}!</a></li>
-                        <li><a href="/accounts/logout">Logout</a></li>
-                    </ul>
-                  
-                </div>
-            </ul>
 
-
-</div> 
-
-
-        
 
     <!-- RESPONSIVE TOP NAV -->
 
-
-    
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <section class="top-nav">
     <div class="logo">
         <a href="https://ham-system.herokuapp.com/">
-            <img alt="ham" src="../static/images/logo.png"
+            <img alt="ham" src="{% static 'images/logo.png' %}"
             width=50" height="50">
             </a>
 
     </div>
+   
+    {% if request.path == "/employees/" %} 
     <div class="search-bar">
         <form>
             <input type="text" name="name" placeholder="name" class="employee-search-bar"/>
+            <input type="submit" value="Search" class="employee-search-btn"/>
+        <a class ="clear" href="{% url 'employee_list' %}">Clear Search</a>
+        </form>
+        
+    </div>
+   
+
+    {% elif  request.path == "/devices/" %}
+
+    <div class="search-bar">
+        <form>
+            <input type="text" name="device" placeholder="device" class="employee-search-bar"/>
             <input type="submit" value="Search" class="employee-search-btn"/>
         <a class ="clear" href="{% url 'devices_index' %}">Clear Search</a>
         </form>
         
     </div>
+
+    {% else %}
+
+    
+
+
+    {% endif %}
 
     <input id="menu-toggle" type="checkbox" />
     <label class='menu-button-container' for="menu-toggle">
@@ -82,6 +70,7 @@
         <li><a href="/inventory">Inventory</a></li> 
        <li><a href="/">Welcome, {{user.username}}!</a></li>
        <li><a href="/accounts/logout">Logout</a></li>
+     
     </ul>
   </section>
 
@@ -107,6 +96,7 @@
                     <ul>
                         <li><span><a href="{% url 'login' %}">Login</a></span></li>
                         <li><span><a href="{% url 'signup' %}">Register</a></span></li>
+                        
                     </ul>
                   
                 </div>
@@ -115,12 +105,17 @@
         </ul>
     </div>
       {% endif %}
+
+      
            
             <div class="content">
+               
                 {% block nav %}
                 {% endblock %}
                 {% block body %}
                     {% block content %}
+
+                   
                     {% endblock %}
                 {% endblock %}
             </body>
