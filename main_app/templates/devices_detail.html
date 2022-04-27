@@ -17,7 +17,7 @@
   <div class="column">  
        <div >
            <ul >
-               <li><h1> Edit {{employee.name}} </h1></li>
+               <li><h1> Edit {{device.name}}</h1></li>
                
            </ul>
        </div>  
@@ -33,13 +33,11 @@
             </tr>
             <tr>
               <div class="borderlines">
-                {% for employee in devices.employee.all %}
+             
                 <td class="inventory-spacing"> Name: {{device.name}} </td>
-                {% empty %}
-                <td class="inventory-spacing"> No Device currently assigned to Employee. </td>
-
-                
-                {% endfor %}
+                <td class="inventory-spacing"> Name: {{device.device_type}} </td>
+                <td class="inventory-spacing"> Name: {{device.serial_number}} </td>
+               
                 
 
                 </div>
