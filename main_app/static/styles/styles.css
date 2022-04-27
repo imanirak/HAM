@@ -32,9 +32,9 @@ body{
    
 }
 
-table {
+/* table {
     padding-left:5em;
-}
+} */
 
 .employee-title {
     font-size:10px;
@@ -174,6 +174,7 @@ a {
 }
 
 .container {
+  flex-wrap:wrap;
     padding:0;
     margin:0 auto;
     display:flex;
@@ -183,9 +184,84 @@ a {
     width:55vw;
     height:60vh;
     overflow:auto;
+    box-shadow: 0px 0px 25px 2px rgba(0, 0, 0, 0.10);
 }
 
 
+
+.large-user-container {
+  flex-wrap:wrap;
+    padding:0;
+    margin:0 auto;
+    display:flex;
+    background-color:white;
+    justify-content: center;
+    border-radius:10px;
+    width:55vw;
+    height:60vh;
+    overflow:auto;
+    box-shadow: 0px 0px 25px 2px rgba(0, 0, 0, 0.10);
+}
+
+
+
+.user-profile {
+ 
+  width:auto;
+}
+
+.user-profile-small {
+  table-layout:fixed;
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+  
+}
+
+.user-profile-small tr, .user-profile-small td {
+text-align:center;
+padding:5px;
+padding-left:0;
+
+}
+
+.small-container {
+    display:flex;
+    background-color:white;
+    justify-content: center;
+    border-radius:10px;
+    width:29vw;
+    height:25vh;
+    overflow:auto;
+    box-shadow: 0px 0px 25px 2px rgba(0, 0, 0, 0.10);
+    
+}
+
+.space {
+  padding:2em;
+}
+
+.column {
+  padding-bottom:2em;
+}
+
+
+
+.row2 {
+  display:flex;
+  flex-direction:row;
+  justify-content:space-evenly; 
+}
+
+.box2 {
+  display:flex;
+  justify-content:row;
+
+}
+
+.too-the-left  td{
+  padding-left:1.5em;
+}
 
 .box {
     font-family:Open sans;
@@ -193,6 +269,12 @@ a {
     border-radius:10px;
     box-shadow: 0px 11px 25px 2px rgba(0, 0, 0, 0.14);
 }
+/* 
+.row-r {
+  display:flex;
+  flex-direction:column;
+}
+ */
 
 .search {
     all:unset;
@@ -294,6 +376,7 @@ td{
   }
   
   .employee-info h2 {
+      font-size:20px;
       padding-left:1em;
       font-family:Libre Baskerville;
   }
@@ -341,12 +424,67 @@ td{
 }
 
 
+.homepage-container {
+  flex-wrap:wrap;
+    padding:0;
+    margin:0 auto;
+    display:flex;
+    background-color:white;
+    justify-content: center;
+    border-radius:10px;
+    width:60vw;
+    height:65vh;
+    overflow:hidden;
+    box-shadow: 0px 0px 25px 2px rgba(0, 0, 0, 0.10);
+}
+
+
+
+.homepage-heading {
+  margin-top:25px;
+  font-size:40px;
+  margin-bottom:0;
+  padding-bottom:0;
+  font-family:Libre Baskerville;
+  color:var(--dark-purple);
+}
+
+.homepage-heading p {
+  padding:0px;
+  margin:0;
+
+}
+
+.ham {
+  padding:0;
+  margin:1em;
+    color:var(--pale-purple);
+}
+
 .employee-heading {
-    margin-top:25px;
+    margin-top:15px;
     margin-right:5em;
     font-family:Libre Baskerville;
     color:var(--dark-purple);
 }
+
+.admin-heading {
+  margin-top:1.5em;
+  font-family:Libre Baskerville;
+  color:var(--dark-purple);
+}
+
+.devices-shipped-heading {
+  margin-top:1.5em;
+  margin-right:20em;
+  font-family:Libre Baskerville;
+  color:var(--dark-purple);
+}
+
+.box2 h1 {
+padding-left:1em;
+}
+
 
 .create-employee {
     margin-top:25px;
@@ -366,6 +504,32 @@ td{
       box-sizing: border-box;
       border: 2px solid rgba(0, 0, 0, 0.02);
     max-width:100%;
+}
+
+.add-padding{
+  padding-right:20px;
+}
+
+
+
+.create-employee-profile {
+  margin-top:25px;
+  margin-bottom:25px;
+  margin-left:5em;
+  text-transform:uppercase;
+  font-family:open sans;
+    color: var(--dark-purple);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+  max-width:100%;
 }
 
 
@@ -440,7 +604,7 @@ td{
 .employee-top {
     display:flex;
     justify-content: center;
-    padding-top:40px;
+    padding-top:20px;
 }
 
 
@@ -608,6 +772,32 @@ html, body {
   margin: 0 1rem;
 }
 
+
+.row {
+  display:flex;
+  flex-direction:row;
+  justify-content:space-evenly; 
+}
+
+.svg {
+  padding-top:5em;
+  display:block;
+
+}
+
+.info {
+  padding-left:5em;
+}
+
+.home-page-img img {
+  padding:0;
+}
+
+img {
+  padding:0;
+}
+
+
 .menu-button-container {
   display: none;
   height: 100%;
@@ -714,7 +904,7 @@ html, body {
     text-align:left;
     }
 
-   .signup input[type=submit] ,input[value=Submit]{
+   .signup {
         margin-left:12em;
         margin-top:2em;
 
@@ -725,4 +915,6 @@ html, body {
         align-self: center;
     }
 
-  
+  .delete-content {
+   padding-top:20px;
+  }

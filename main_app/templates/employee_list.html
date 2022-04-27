@@ -35,7 +35,7 @@ Employee List
         </div>  
         {% for employee in employees %}
             <a href="{% url 'employee_detail' employee.pk %}">
-                <table>
+                <table class="too-the-left">
                     <tr>
                         <th>Name</th>
                         <th>Serial Number</th>
@@ -47,19 +47,27 @@ Employee List
                     <tr>
                         <div class="borderlines">
                         <td class="employee-name">{{employee.first_name}} {{employee.last_name}}</td>
-                        {% for device in employee.devices.all %}
                         <td class="employee-device">{{employee.department}}</td>
+                        {% for device in employee.devices.all %}
+                    
+                        {% if devices == False %}
+                        <td class="employee-device-model-number">PENDING</td>
+                        <td class="employee-device-status">PENDING</td>
+                        <td class="employee-device-ship-status">PENDING</td> 
+                      
+                        {% endif %}
                         <td class="employee-device-model-number">{{device.device_type}}</td>
                         <td class="employee-device-status">{{device.status}}</td>
                         <td class="employee-device-ship-status">{{device.ship_status}}</td>
-  
+                       
+                        {% endfor %}
                         <td class="employee-edit-btn"><a href="{% url 'employee_detail' employee.id%}"><button class="employee-add">DETAILS</button></a></td> 
                         </div>
                         
                     </tr>
                 </table>
 
-            {% endfor %}
+       
            
     
         {% endfor %}

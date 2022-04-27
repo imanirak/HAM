@@ -2,13 +2,69 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Delete Device</h1>
+
+
+
+<div class="employee-top">
+    <div class="box1"> <h1 class="employee-heading"></h1></div>
+    <div class="box2"> </div>
+    
+  
+  </div>
+  
+  
+  <div class="container">
+    <div class="create-title">
+      <ul>
+    <div class="column">  
+         <div >
+             <ul >
+                 <li><h1>Delete Device</h1>
+                 </li>
+                 
+             </ul>
+         </div>  
+     <div>
+       <div>
+  
+
+        
+
+
+      <div class="delete-content">
+        <table>
+            <tr class="">
+                <th>Name</th>
+                <th>Serial Number</th>           
+            </tr>
+            <tr>
+              <div class="borderlines">
+                <td class="inventory-spacing"> 
+                    <form action="" method="POST">
 
     <h4>Are you sure you want to delete <strong>{{ device }}</strong>?</h4>
+                        {% csrf_token %}
+                        <input type="submit" value="Yes - Delete">
+                        <a href="{% url 'devices_show' device.id %}">Cancel</a>
+                    </form>
+                   </td>
+               
+                </div>
+                
+            </tr>
+        </table>
 
-    <form action="" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="Yes - Delete">
-        <a href="{% url 'devices_show' device.id %}">Cancel</a>
-    </form>
+
+       
+
+    </a>
+
+
+</div>
+
+</div>
+
+    
+
+  
 {% endblock %}

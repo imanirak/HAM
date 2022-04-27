@@ -18,6 +18,13 @@ from django.forms import Select
 
 class Home(TemplateView):
     template_name='home.html'
+    
+    def login_page(request):
+        context = {
+            'login': login,
+        }
+    
+        return render(request, context)
  
 class About(TemplateView):
     template_name='about.html'
@@ -40,24 +47,36 @@ class Employee_Create(LoginRequiredMixin, CreateView):
 class Employee_List(TemplateView):
     template_name='employee_list.html'
     
+    
+    # def no_device(request, employee):
+    #     employee = Employee.objects.filter(employee=employee)
+    #     print(employee)
+    #     if employee in employee.devices.all() == None:
+    #         print(employee)
+         
+    #         return render(request, {'employee': employee})
+        
+    # def employee_device(request, id):
+    #     employee = Employee.objects.get(id=id)
+    #     print(employee)
+        # context['employees']= Employee.objects.filter(devices__name=f"{employee.name} Device")
+        # # print(employee_device)
+        # return  context
+        
+        
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         name = self.request.GET.get('name')
-        employees = Employee.objects.all()
-        for employee in employees:
-            for device in employee.devices.all():
-                if device.name == employee.name:
-                    print(device.name)
-                    print(employee.name)
-                    Select()
-                if name != None:
+    
+
+        if name != None:
                     context['employees']=Employee.objects.filter(name__icontains=name)
                     context['header']= f'Searching for {name}'
-                else:
+        else:
                     context['employees']=Employee.objects.all()
                     context['devices']=Device.objects.all()
             
-            context['header']= 'Employees:'
+        context['header']= 'Employees:'
             
         return context
     
@@ -113,6 +132,7 @@ class Device_List(TemplateView):
             
         return context
     
+    
 @login_required
 def devices_index(request):
     devices = Device.objects.all()
@@ -140,10 +160,9 @@ class Device_Create(CreateView):
         print(device)
         #update name based on last created employee
         employee = Employee.objects.last()
-        device_name = employee
-        
-        device.name = device_name
-        device.save(['name'])
+        employee_name = employee.first_name 
+        device.name = employee_name + " " + str("Device")
+        device.save()
         
         # print(employee.devices.contains())
      
@@ -168,6 +187,9 @@ class Device_Create(CreateView):
 class Devices_Detail(DetailView):
     model = Device
     template_name = "devices_detail.html"
+    employee = Employee.objects.all()
+    devices = Device.objects.all()
+    print(employee)
  
 
 @method_decorator(login_required, name="dispatch")  
@@ -239,12 +261,7 @@ class Inventory_Update(UpdateView):
         return reverse('inventory_detail', kwargs={'pk': self.object.pk})
     
     
-# @method_decorator(login_required, name="dispatch")
-# class Inventory_Update(UpdateView):
-#     model = Inventory
-#     fields = ['name']
-#     template_name = 'inventory_update.html'
-#     success_url = "/inventory"
+
     
 @method_decorator(login_required, name="dispatch")    
 class Inventory_Add(UpdateView):
@@ -274,6 +291,19 @@ class Inventory_Delete(DeleteView):
     success_url = '/inventory'
    
 ###########################SIGNUP##################################
+
+
+@login_required
+def profile(request, username):
+    user = User.objects.get(username=username)
+    employees = Employee.objects.all()
+    employee = Employee.objects.last()
+    devices = Device.objects.all()
+    inventory = Inventory.objects.all()
+    print(user)
+    print(devices)
+    print(employees)
+    return render(request, 'profile.html', {'username': username, 'employees': employees,  'employee': employee,'devices':devices, 'inventory':inventory})
 
 def signup_view(request):
     if request.method == 'POST':
