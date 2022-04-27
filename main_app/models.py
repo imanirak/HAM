@@ -48,10 +48,7 @@ SHIPSTATUS_CHOICES = (
 
 
 )
-
-    
-
-    
+  
     
 class Device(models.Model):
     name = models.CharField(max_length=50)
