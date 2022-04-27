@@ -1,7 +1,19 @@
 
+# Table of Contents
+#### User Stories
+#### ERD
+#### Wire-frames
+#### Deployment
+#### Code I am Proud of
+#### Words of Wisdom
+
+***
+
+
 # HAM
 
 An incredible Hardware Asset Management(HAM) System. Easily manage all hardware assets throughout the company. Keep accurate numbers of items in stock and in-repair.
+
 
 # User Stories:
 
@@ -62,3 +74,18 @@ An incredible Hardware Asset Management(HAM) System. Easily manage all hardware 
 
 - All Departments
 ![header](https://github.com/imanirak/HAM/blob/main/readmeinfo/HAM-Departments.jpg)
+
+
+# Deployment
+
+[Ham Heroku Deployment](https://ham-system.herokuapp.com/ "HAM Heroku Deployment")
+![header](https://github.com/imanirak/HAM/blob/main/readmeinfo/homepage.png)
+
+
+
+# Code I am Proud of
+![header](https://github.com/imanirak/HAM/blob/main/readmeinfo/proud-code.png)
+> I was extremely happy when I was finally able to grab the name of the last employee created. Followed by attaching that name to following device created. Allowing for an easy distinction between the entire list of devices or need to manually rename them all. In addition, to creating that device, depending on the device model it will be deducted from the corresponding inventory. Allowing us to keep track of when we need to replenish our stock.
+
+# Words of Wisdom
+> Printing everything and anything I thought would help me achieve what I was aiming for helped me learn which variable I needed to call in order to grab specific values. For example the .last() method was incredibly handy when needing to know who was the last employee created in the system.
