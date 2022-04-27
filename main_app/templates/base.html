@@ -87,23 +87,6 @@
         </div>
     </nav> -->
 
- {% else %}
-        <div class="loggedin">
-            
-        <ul>
-           
-                <div class="welcome">
-                    <ul>
-                        <li><span><a href="{% url 'login' %}">Login</a></span></li>
-                        <li><span><a href="{% url 'signup' %}">Register</a></span></li>
-                        
-                    </ul>
-                  
-                </div>
-                          
-           
-        </ul>
-    </div>
       {% endif %}
 
       
@@ -115,7 +98,7 @@
                 {% block body %}
                     {% block content %}
 
-                   
+
                     {% endblock %}
                 {% endblock %}
             </body>

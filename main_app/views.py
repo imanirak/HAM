@@ -18,6 +18,13 @@ from django.forms import Select
 
 class Home(TemplateView):
     template_name='home.html'
+    
+    def login_page(request):
+        context = {
+            'login': login,
+        }
+    
+        return render(request, context)
  
 class About(TemplateView):
     template_name='about.html'
@@ -240,12 +247,7 @@ class Inventory_Update(UpdateView):
         return reverse('inventory_detail', kwargs={'pk': self.object.pk})
     
     
-# @method_decorator(login_required, name="dispatch")
-# class Inventory_Update(UpdateView):
-#     model = Inventory
-#     fields = ['name']
-#     template_name = 'inventory_update.html'
-#     success_url = "/inventory"
+
     
 @method_decorator(login_required, name="dispatch")    
 class Inventory_Add(UpdateView):

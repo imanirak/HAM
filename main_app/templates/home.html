@@ -2,5 +2,46 @@
 
 {% extends 'base.html' %} 
 {% block content %}
-<h1>HAM</h1>
+
+{% if user.is_authenticated %}
+
+
+
+
+
+
+{% else %}
+
+
+<div class="employee-top">
+    <div class="box1"> <h1 class="employee-heading"></h1></div>
+  
+  </div>
+  
+  
+  <div class="homepage-container">
+  
+     
+    <div class="row">  
+         <div class="info">
+           
+
+{% include "registration/login.html" %}
+
+         </div>  
+
+         <div class="svg">
+
+
+        <img class="home-page-img" src="../static/images/homepage-img.png" width="500px" height="400px">
+         </div>
+  
+       <div>
+  
+  
+
+{% endif %}
+
+
+
 {% endblock %}
